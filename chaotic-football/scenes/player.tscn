@@ -1,12 +1,27 @@
 [gd_scene format=3 uid="uid://disvxy7foj5u"]
 
-[node name="Player" type="Node2D" unique_id=611781356]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_u8vuu"]
+load_path = "res://.godot/imported/playerTwo.png-c6b9572b43dade3f4db7b8a37aee7ba6.ctex"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1919224831]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3vyb7"]
+radius = 4.0
+height = 16.0
+
+[node name="Player" type="Node2D" unique_id=718855102]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1190138603]
+
+[node name="AnimationTree" type="AnimationTree" parent="CharacterBody2D" unique_id=702420488]
+root_node = NodePath("../Sprite2D")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D" unique_id=853606276]
 root_node = NodePath("../AnimationTree")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=36694356]
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=356943575]
+position = Vector2(1, 0)
+texture = SubResource("CompressedTexture2D_u8vuu")
+hframes = 3
+vframes = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1868372980]
-
-[node name="AnimationTree" type="AnimationTree" parent="." unique_id=174002482]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=693455288]
+shape = SubResource("CapsuleShape2D_3vyb7")
