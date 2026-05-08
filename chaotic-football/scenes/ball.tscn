@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dpfk2pb81855g"]
+
+[ext_resource type="Texture2D" uid="uid://casklfa4l62nh" path="res://assets/SoccerGame/Simpleball.png" id="1_7s4qf"]
+[ext_resource type="Script" uid="uid://brfcsegdrnkbd" path="res://scripts/ball.gd" id="1_cxlvu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cxlvu"]
+radius = 5.0
+
+[node name="Ball" type="RigidBody2D" unique_id=1814174994]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_cxlvu")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2000643796]
+texture = ExtResource("1_7s4qf")
+hframes = 2
+vframes = 2
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=178162198]
+shape = SubResource("CircleShape2D_cxlvu")
