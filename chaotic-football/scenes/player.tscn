@@ -1,5 +1,77 @@
 [gd_scene format=3 uid="uid://disvxy7foj5u"]
 
+[ext_resource type="Script" uid="uid://cetgnntxheonu" path="res://scripts/character_body_2d.gd" id="1_3vyb7"]
+
+[sub_resource type="Animation" id="Animation_3vyb7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_g2els"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_dqkch"]
+resource_name = "jumping"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_qhqgy"]
+resource_name = "running"
+length = 1.2333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.36666667, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dqkch"]
+_data = {
+&"RESET": SubResource("Animation_3vyb7"),
+&"idle": SubResource("Animation_g2els"),
+&"jumping": SubResource("Animation_dqkch"),
+&"running": SubResource("Animation_qhqgy")
+}
+
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_u8vuu"]
 load_path = "res://.godot/imported/playerTwo.png-c6b9572b43dade3f4db7b8a37aee7ba6.ctex"
 
@@ -7,21 +79,22 @@ load_path = "res://.godot/imported/playerTwo.png-c6b9572b43dade3f4db7b8a37aee7ba
 radius = 4.0
 height = 16.0
 
-[node name="Player" type="Node2D" unique_id=718855102]
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1190138603]
+collision_mask = 2
+script = ExtResource("1_3vyb7")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1190138603]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=853606276]
+libraries/ = SubResource("AnimationLibrary_dqkch")
 
-[node name="AnimationTree" type="AnimationTree" parent="CharacterBody2D" unique_id=702420488]
-root_node = NodePath("../Sprite2D")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D" unique_id=853606276]
-root_node = NodePath("../AnimationTree")
-
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=356943575]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=356943575]
+texture_filter = 1
 position = Vector2(1, 0)
 texture = SubResource("CompressedTexture2D_u8vuu")
 hframes = 3
 vframes = 2
+frame = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=693455288]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=693455288]
 shape = SubResource("CapsuleShape2D_3vyb7")
+
+[node name="Player" type="Node2D" parent="." unique_id=718855102]

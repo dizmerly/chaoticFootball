@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://baxrg1wu42aao"]
+
+[ext_resource type="PackedScene" uid="uid://cdr6l300mduv7" path="res://scenes/game.tscn" id="1_o5qli"]
+
+[node name="Main" type="Node2D" unique_id=1584985383]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=224057487]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(4, 4)
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=2145343575]
+handle_input_locally = false
+size = Vector2i(480, 270)
+render_target_update_mode = 4
+
+[node name="Game" parent="SubViewportContainer/SubViewport" unique_id=1370336921 instance=ExtResource("1_o5qli")]
