@@ -1,17 +1,17 @@
 [gd_scene format=3 uid="uid://cdt8sbsvfrn2d"]
 
 [ext_resource type="Texture2D" uid="uid://bv368tru3403t" path="res://assets/SoccerGame/Goal.png" id="1_bhbof"]
-[ext_resource type="Script" uid="uid://bfundrxgyj0xs" path="res://scripts/area_2d.gd" id="1_jxhj0"]
+[ext_resource type="Script" uid="uid://bfundrxgyj0xs" path="res://scripts/goalArea.gd" id="1_jxhj0"]
 
 [node name="goalpost" type="Node2D" unique_id=2007451905]
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1940559508]
-collision_layer = 7
+[node name="goalArea" type="Area2D" parent="." unique_id=1940559508]
+collision_layer = 9
 collision_mask = 7
 script = ExtResource("1_jxhj0")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=881631382]
-position = Vector2(-17, -14)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="goalArea" unique_id=881631382]
+position = Vector2(-17, -13)
 polygon = PackedVector2Array(-9, -10, 21, -10, 36, -3, 42, 15, 44, 46, -9, 46)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=482738133]
@@ -22,3 +22,5 @@ collision_layer = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=2077461744]
 polygon = PackedVector2Array(-27, -26, 4, -26, 20, -21, 24, -14, 27, -8, 29, 3, 30, 32, 27, 32, 27, 11, 24, -8, 20, -17, 12, -21, 4, -24, -27, -24, -27, -26)
+
+[connection signal="body_entered" from="goalArea" to="goalArea" method="_on_body_entered"]

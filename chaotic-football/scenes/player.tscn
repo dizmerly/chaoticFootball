@@ -79,6 +79,10 @@ load_path = "res://.godot/imported/playerTwo.png-c6b9572b43dade3f4db7b8a37aee7ba
 radius = 4.0
 height = 16.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
+radius = 7.0
+height = 24.0
+
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1190138603]
 collision_mask = 6
 script = ExtResource("1_3vyb7")
@@ -95,6 +99,16 @@ vframes = 2
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=693455288]
+visible = false
 shape = SubResource("CapsuleShape2D_3vyb7")
 
 [node name="Player" type="Node2D" parent="." unique_id=718855102]
+
+[node name="BallPickup" type="Area2D" parent="." unique_id=1646018701]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BallPickup" unique_id=1204596718]
+shape = SubResource("CapsuleShape2D_g2els")
+
+[connection signal="body_entered" from="BallPickup" to="." method="_on_ball_pickup_body_entered"]
