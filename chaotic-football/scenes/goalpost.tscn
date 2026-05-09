@@ -21,6 +21,7 @@ texture = ExtResource("1_bhbof")
 collision_layer = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=2077461744]
-polygon = PackedVector2Array(-27, -26, 4, -26, 20, -21, 24, -14, 27, -8, 29, 3, 30, 32, 27, 32, 27, 11, 24, -8, 20, -17, 12, -21, 4, -24, -27, -24, -27, -26)
+position = Vector2(0, -2)
+polygon = PackedVector2Array(22, -13, 24, -5, 27, 12, 27, 34, 29, 34, 29, 11, 27, -4, 24, -14, 16, -21, 4, -26, -27, -26, -27, -24, 3, -23, 14, -20)
 
 [connection signal="body_entered" from="goalArea" to="goalArea" method="_on_body_entered"]

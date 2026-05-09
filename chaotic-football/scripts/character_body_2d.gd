@@ -82,10 +82,9 @@ func shoot_ball():
 	pickupArea.monitoring = false
 	
 	
-	held_ball.set_collision_mask_value(1, true)
 #	turning collisions back on
 	held_ball.set_collision_layer_value(3, true)
-	
+	held_ball.set_collision_mask_value(1, true)
 #	reset velocity
 	held_ball.linear_velocity = Vector2.ZERO
 	held_ball.angular_velocity = 0
@@ -102,10 +101,10 @@ func shoot_ball():
 	held_ball.freeze = false
 	held_ball.apply_impulse(shoot_direction * SHOOTINGVELOCITY)
 
+	held_ball = null
 	
 	await get_tree().create_timer(0.05).timeout
 	pickupArea.monitoring = true
-	held_ball = null
 	
 
 func _physics_process(delta: float) -> void:
