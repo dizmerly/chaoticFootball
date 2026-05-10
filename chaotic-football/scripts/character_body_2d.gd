@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 
 const SPEED = 300.0
+const MAX_SPEED = 500.0
+const RUN_SPEED_MULT = 1.1
 const JUMP_VELOCITY = -400.0
 const BALLDIST = 12
 const SHOOTINGVELOCITY = 300.0
@@ -29,7 +31,7 @@ func _input(event: InputEvent):
 # 	Change UI to show controller prompts
 	elif event is InputEventKey:
 		#print("Using Keyboard")
-		_is_roller = false        
+		_is_roller = false
 
 # get vector between (mouse) <--- (player position)
 func get_mouse_dir() -> Vector2:
@@ -38,16 +40,18 @@ func get_mouse_dir() -> Vector2:
 	return direction.normalized()
 
 # get vector of joystick direction. fallback to default 45 degree shot
-func get_stick_dir() -> Vector2: 
+func get_stick_dir() -> Vector2:
 	var stickDir = Input.get_vector("left", "right",
 	 "up", "down")
 	if stickDir.length() > 0:
 		return stickDir
 		
+#	magic numbers here, simply hardcoded to shoot in direction
+#	character is looking at
 	if sprite.flip_h:
-		return Vector2(-1, -1).normalized()
+		return Vector2(-1, 0).normalized()
 	else:
-		return Vector2(1, -1).normalized()
+		return Vector2(1, 0).normalized()
 
 # updating ball position based on fixed distance
 # basically a function to set where the ball is held by the player 
@@ -83,6 +87,8 @@ func shoot_ball():
 	
 	
 #	turning collisions back on
+#	TODO: fix arbitrary values here, make sure that layers have 
+#	actual variable names
 	held_ball.set_collision_layer_value(3, true)
 	held_ball.set_collision_mask_value(1, true)
 #	reset velocity
@@ -181,4 +187,3 @@ func _on_ball_pickup_body_entered(body: Node2D) -> void:
 		held_ball.set_collision_mask_value(1, false)
 		
 		update_ball_pos(BALLDIST)
-		
