@@ -7,6 +7,8 @@ const RUN_SPEED_MULT = 1.1
 const JUMP_VELOCITY = -400.0
 const BALLDIST = 12
 const SHOOTINGVELOCITY = 450.0
+const BALL_HANDLING_DISTANCE = 12
+
 
 @onready var sprite = $Sprite2D
 @onready var anim = $AnimationPlayer
@@ -44,7 +46,7 @@ func get_stick_dir() -> Vector2:
 	var stickDir = Input.get_vector("left", "right",
 	 "up", "down")
 	if stickDir.length() > 0:
-		return stickDir
+		return stickDir.normalized()
 		
 #	magic numbers here, simply hardcoded to shoot in direction
 #	character is looking at
@@ -58,14 +60,18 @@ func get_stick_dir() -> Vector2:
 func update_ball_pos(dist):
 	if held_ball == null:
 		return
-		
-	var offset = Vector2(dist, 0)
-		
-	if sprite.flip_h:
-		offset.x = - dist
+	
+	var offset
+	if _is_roller:
+		offset = get_stick_dir() * BALL_HANDLING_DISTANCE
+	else:
+		offset = get_mouse_dir() * BALL_HANDLING_DISTANCE
+		#
+	#if sprite.flip_h:
+		#offset.x = - dist
 		
 	held_ball.global_position = global_position + offset
-
+	
 
 func _ready() -> void:
 	add_to_group("player")
@@ -106,9 +112,9 @@ func shoot_ball():
 	held_ball.freeze_mode = RigidBody2D.FREEZE_MODE_STATIC
 	held_ball.freeze = false
 	held_ball.apply_impulse(shoot_direction * SHOOTINGVELOCITY)
+	
 
 	held_ball = null
-	
 	await get_tree().create_timer(0.05).timeout
 	pickupArea.monitoring = true
 	
