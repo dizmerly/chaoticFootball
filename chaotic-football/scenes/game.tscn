@@ -248,11 +248,11 @@ tile_set = SubResource("TileSet_kvuet")
 
 [node name="goalpost" parent="." unique_id=2007451905 instance=ExtResource("6_p57ef")]
 z_index = 1
-position = Vector2(400, -16)
+position = Vector2(383, -176)
 
 [node name="goalpost2" parent="." unique_id=540948908 instance=ExtResource("6_p57ef")]
 z_index = 1
-position = Vector2(-384, -16)
+position = Vector2(-406, -192)
 scale = Vector2(-1, 1)
 
 [node name="Background" type="TileMapLayer" parent="." unique_id=1229475143]

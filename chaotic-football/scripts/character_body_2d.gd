@@ -6,7 +6,7 @@ const MAX_SPEED = 500.0
 const RUN_SPEED_MULT = 1.1
 const JUMP_VELOCITY = -400.0
 const BALLDIST = 12
-const SHOOTINGVELOCITY = 300.0
+const SHOOTINGVELOCITY = 450.0
 
 @onready var sprite = $Sprite2D
 @onready var anim = $AnimationPlayer
@@ -163,7 +163,7 @@ func _physics_process(delta: float) -> void:
 	
 
 	move_and_slide()
-	position = position.round()
+	#position = position.round()
 			
 #	handle whether user is using m&k or controller
 	if held_ball != null:
