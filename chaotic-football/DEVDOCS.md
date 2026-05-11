@@ -9,3 +9,8 @@ no idea why this happened.
 BUG 
 When jumping and throwing the ball, if you are reasonably close enough to the goalpost
 you can throw the ball through the collision shape
+FIXED - the problem was that the physics tick speed was too slow 
+(changed to 120) and the physics collision solver is continous now which better
+calculates physics collisions. 
+
+BUG 

@@ -1,6 +1,11 @@
 extends Camera2D
 
 
+#TODO: fix the player variable here to be an 
+#array that tracks all the players
+#and modify camera script to average it's position
+#based on all player positions and the ball
+#centering itself at the ball's position. 
 @onready var player = $"../Player"
 @onready var ball = $"../Ball"
 

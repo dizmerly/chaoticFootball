@@ -14,7 +14,7 @@ radius = 5.0
 collision_layer = 4
 collision_mask = 11
 physics_material_override = SubResource("PhysicsMaterial_cxlvu")
-continuous_cd = 1
+continuous_cd = 2
 script = ExtResource("1_cxlvu")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2000643796]

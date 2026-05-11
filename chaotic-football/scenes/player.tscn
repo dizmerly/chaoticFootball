@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://disvxy7foj5u"]
 
-[ext_resource type="Script" uid="uid://cetgnntxheonu" path="res://scripts/character_body_2d.gd" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://cetgnntxheonu" path="res://scripts/player.gd" id="1_3vyb7"]
 
 [sub_resource type="Animation" id="Animation_3vyb7"]
 length = 0.001
