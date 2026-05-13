@@ -7,22 +7,21 @@ const RUN_SPEED_MULT = 1.1
 const JUMP_VELOCITY = -400.0
 const BALLDIST = 12
 const SHOOTINGVELOCITY = 450.0
-const BALL_HANDLING_DISTANCE = 12 
+const BALL_HANDLING_DISTANCE = 12
 
-var device_num: int 
+var device_num: int
 
 var button_bindings = {
-	"interact" : [JOY_BUTTON_X, KEY_F],
-	"jump" : [JOY_BUTTON_A, KEY_SPACE],
-	"run" : [JOY_BUTTON_B, KEY_SHIFT]
+	"interact": [JOY_BUTTON_X, KEY_F],
+	"jump": [JOY_BUTTON_A, KEY_SPACE],
+	"run": [JOY_BUTTON_B, KEY_SHIFT]
 }
 
 var axis_bindings = {
-	"horizontal" : [JOY_AXIS_LEFT_X],
-	"vertical" : [JOY_AXIS_LEFT_Y],
-	"interact" : [JOY_AXIS_TRIGGER_RIGHT]
+	"horizontal": [JOY_AXIS_LEFT_X],
+	"vertical": [JOY_AXIS_LEFT_Y],
+	"interact": [JOY_AXIS_TRIGGER_RIGHT]
 }
-
 
 
 @onready var sprite = $Sprite2D
@@ -38,10 +37,9 @@ var current_state = States.IDLE
 
 var _is_roller = false
 
-
 func _ready() -> void:
 	add_to_group("player")
-	pickupArea.body_entered.connect(_on_ball_pickup_body_entered)	
+	pickupArea.body_entered.connect(_on_ball_pickup_body_entered)
 
 
 func _input(event: InputEvent):
@@ -55,18 +53,26 @@ func _input(event: InputEvent):
 	elif event is InputEventKey:
 		#print("Using Keyboard")
 		_is_roller = false
-		
-	if event.device != device_num: return
 	
-	# Handle jump
-	if event.action in button_bindings["jump"] and event.pressed:
-		jump()
-	#	shooting ball mechanics via interaction
-	if event.action in button_bindings["interact"] and event.pressed:
-		if held_ball != null:
+	if _is_roller:
+		if event.device != device_num: return
+		if not event is InputEventJoypadButton: return
+		
+		# Handle jump
+		if event.button_index in button_bindings["jump"] and event.pressed:
+			jump()
+		#	shooting ball mechanics via interaction
+		if event.button_index in button_bindings["interact"] and event.pressed:
+			if held_ball != null:
+				shoot_ball()
+	else:
+		if not event is InputEventKey: return
+		if not event.pressed or event.echo: return
+		
+		if event.keycode in button_bindings["jump"]:
+			jump()
+		if event.keycode in button_bindings["interact"] and held_ball != null:
 			shoot_ball()
-	
-		
 		
 		
 # 0.2 deadzone here same as boilerplate
@@ -87,7 +93,7 @@ func get_stick_dir() -> Vector2:
 	#var stickDir = Input.get_vector("left", "right",
 	 #"up", "down")
 	var stickDir = Vector2(
-		apply_deadzone(Input.get_joy_axis(device_num, axis_bindings["horizontal"][0])), 
+		apply_deadzone(Input.get_joy_axis(device_num, axis_bindings["horizontal"][0])),
 		apply_deadzone(Input.get_joy_axis(device_num, axis_bindings["vertical"][0]))
 		)
 	if stickDir.length() > 0:

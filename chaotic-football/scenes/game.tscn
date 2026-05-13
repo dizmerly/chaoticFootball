@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://cdr6l300mduv7"]
 
-[ext_resource type="PackedScene" uid="uid://disvxy7foj5u" path="res://scenes/player.tscn" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://bahwtayq5u8qq" path="res://scripts/game.gd" id="1_kvpfn"]
 [ext_resource type="Texture2D" uid="uid://bv368tru3403t" path="res://assets/SoccerGame/Goal.png" id="2_iywne"]
 [ext_resource type="Script" uid="uid://dkdcd477sid1a" path="res://scripts/camera_2d.gd" id="2_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://7wmeq17pjuhb" path="res://assets/SoccerGame/Sky.png" id="3_p57ef"]
@@ -226,15 +226,13 @@ sources/1 = SubResource("TileSetAtlasSource_gee14")
 sources/3 = SubResource("TileSetAtlasSource_trtic")
 
 [node name="Game" type="Node2D" unique_id=1370336921]
+script = ExtResource("1_kvpfn")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=40182301]
 position = Vector2(-32, 8)
 zoom = Vector2(4, 4)
 position_smoothing_speed = 1.0
 script = ExtResource("2_u5sy4")
-
-[node name="Player" parent="." unique_id=718855102 instance=ExtResource("1_uwrxv")]
-position = Vector2(-32, -143)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=204696758]
 

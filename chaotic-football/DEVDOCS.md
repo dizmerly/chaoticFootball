@@ -19,3 +19,11 @@ BUG
 
 TODO: 
 Goal scoring animations, custom scenes
+
+
+TODO:
+my idea is to basically take the averages of the positions
+of the characters from the ball, and the center point of the 
+viewport will be some sort of offset of that. as in like if 
+2 players are equidistant from the ball, the the center is will
+just land at balls position since the distance	
