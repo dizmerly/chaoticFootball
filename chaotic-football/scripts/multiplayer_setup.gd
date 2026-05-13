@@ -3,6 +3,7 @@ extends Node
 # Input pulls how many total controllers connected
 var num_players = Input.get_connected_joypads().size()
 var players: Array = []
+var input_maps: Array = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,14 +21,25 @@ func roller_connection_changed(device: int, connected: bool):
 		num_players = Input.get_connected_joypads().size()
 #		DEBUG
 		print("Connected device {d}".format({"d":device}))
-		add_player()
+		add_player(device)
 	else:
 		pass
 		# TODO: remove player function here in the future
 
-func add_player():
-	var Player = load("res://scenes/player.tscn")
-	var player = Player.instantiate()
+func add_player(player_index):
+	var player = load("res://scenes/player.tscn").instantiate()
+	player.device_num = player_index
+	add_child(player)
 	players.append(player)
 	print(players)
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
 	

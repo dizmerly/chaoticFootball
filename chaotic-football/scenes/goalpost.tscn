@@ -15,6 +15,7 @@ position = Vector2(-17, -13)
 polygon = PackedVector2Array(-9, -10, 21, -10, 36, -3, 42, 15, 44, 46, -9, 46)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=482738133]
+position = Vector2(0, -1)
 texture = ExtResource("1_bhbof")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=391915572]

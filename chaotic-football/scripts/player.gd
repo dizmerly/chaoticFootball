@@ -7,7 +7,22 @@ const RUN_SPEED_MULT = 1.1
 const JUMP_VELOCITY = -400.0
 const BALLDIST = 12
 const SHOOTINGVELOCITY = 450.0
-const BALL_HANDLING_DISTANCE = 4
+const BALL_HANDLING_DISTANCE = 12 
+
+var device_num: int 
+
+var button_bindings = {
+	"interact" : [JOY_BUTTON_X, KEY_F],
+	"jump" : [JOY_BUTTON_A, KEY_SPACE],
+	"run" : [JOY_BUTTON_B, KEY_SHIFT]
+}
+
+var axis_bindings = {
+	"horizontal" : [JOY_AXIS_LEFT_X],
+	"vertical" : [JOY_AXIS_LEFT_Y],
+	"interact" : [JOY_AXIS_TRIGGER_RIGHT]
+}
+
 
 
 @onready var sprite = $Sprite2D
@@ -17,16 +32,17 @@ const BALL_HANDLING_DISTANCE = 4
 @onready var pickupArea = $BallPickup
 var held_ball = null
 
-func _ready() -> void:
-	add_to_group("player")
-	pickupArea.body_entered.connect(_on_ball_pickup_body_entered)
-	
-
 #state machine 
 enum States {IDLE, RUNNING, JUMPING, HOLDING, THROWING}
 var current_state = States.IDLE
 
 var _is_roller = false
+
+
+func _ready() -> void:
+	add_to_group("player")
+	pickupArea.body_entered.connect(_on_ball_pickup_body_entered)	
+
 
 func _input(event: InputEvent):
 	if event is InputEventMouseButton or event is InputEventMouseMotion:
@@ -39,6 +55,26 @@ func _input(event: InputEvent):
 	elif event is InputEventKey:
 		#print("Using Keyboard")
 		_is_roller = false
+		
+	if event.device != device_num: return
+	
+	# Handle jump
+	if event.action in button_bindings["jump"] and event.pressed:
+		jump()
+	#	shooting ball mechanics via interaction
+	if event.action in button_bindings["interact"] and event.pressed:
+		if held_ball != null:
+			shoot_ball()
+	
+		
+		
+		
+# 0.2 deadzone here same as boilerplate
+func apply_deadzone(value: float, deadzone: float = 0.2) -> float:
+	if abs(value) < deadzone:
+		return 0.0
+	return sign(value) * (abs(value) - deadzone) / (1.0 - deadzone)
+
 
 # get vector between (mouse) <--- (player position)
 func get_mouse_dir() -> Vector2:
@@ -48,13 +84,17 @@ func get_mouse_dir() -> Vector2:
 
 # get vector of joystick direction. fallback to default 45 degree shot
 func get_stick_dir() -> Vector2:
-	var stickDir = Input.get_vector("left", "right",
-	 "up", "down")
+	#var stickDir = Input.get_vector("left", "right",
+	 #"up", "down")
+	var stickDir = Vector2(
+		apply_deadzone(Input.get_joy_axis(device_num, axis_bindings["horizontal"][0])), 
+		apply_deadzone(Input.get_joy_axis(device_num, axis_bindings["vertical"][0]))
+		)
 	if stickDir.length() > 0:
 		return stickDir.normalized()
 		
 #	magic numbers here, simply hardcoded to shoot in direction
-#	character is looking at
+#	character is looking at	
 	if sprite.flip_h:
 		return Vector2(-1, 0).normalized()
 	else:
@@ -76,7 +116,6 @@ func update_ball_pos(dist):
 		#offset.x = - dist
 		
 	held_ball.global_position = global_position + offset
-	
 
 	
 func update_animation() -> void:
@@ -88,6 +127,9 @@ func update_animation() -> void:
 			States.JUMPING:
 				anim.play("jumping")
 
+func jump() -> void:
+	if is_on_floor():
+		velocity.y = JUMP_VELOCITY
 
 func shoot_ball():
 	pickupArea.monitoring = false
@@ -122,7 +164,7 @@ func shoot_ball():
 
 func _physics_process(delta: float) -> void:
 	update_animation()
-	var direction := Input.get_axis("left", "right")
+	var direction = apply_deadzone(Input.get_joy_axis(device_num, axis_bindings["horizontal"][0]))
 	
 	# Add the gravity.
 	if not is_on_floor():
@@ -153,9 +195,6 @@ func _physics_process(delta: float) -> void:
 			if is_on_floor():
 				current_state = States.IDLE
 				
-	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -163,10 +202,6 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-	
-#	shooting ball mechanics via interaction
-	if Input.is_action_just_pressed("interact") and held_ball != null:
-		shoot_ball()
 	
 
 	move_and_slide()

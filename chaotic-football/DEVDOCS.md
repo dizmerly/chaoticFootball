@@ -14,3 +14,8 @@ FIXED - the problem was that the physics tick speed was too slow
 calculates physics collisions. 
 
 BUG 
+
+
+
+TODO: 
+Goal scoring animations, custom scenes
