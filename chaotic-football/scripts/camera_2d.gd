@@ -9,10 +9,11 @@ extends Camera2D
 var players = []
 @onready var ball = $"../Ball"
 
-const MIN_ZOOM = 1.5
-const MAX_ZOOM = 4.0 
+const MIN_ZOOM = 1.3
+const MAX_ZOOM = 3.0 
 const ZOOM_DISTANCE = 400.0 
-const MARGIN = 1.2
+const MARGIN = 2
+const BALL_WEIGHT = 2
 var margin = 20 #px
 
 
@@ -38,11 +39,21 @@ func _physics_process(delta: float) -> void:
 	var target_zoom = lerp(MAX_ZOOM, MIN_ZOOM, t)
 	zoom = zoom.lerp(Vector2(target_zoom, target_zoom), 5 * delta)
 	
-
+	
+	var weights = players.size() + BALL_WEIGHT
+	
+	var centroid = ball.global_position * BALL_WEIGHT
+	
+	for p in players:
+		centroid = centroid + p.global_position 
+	
+	centroid = centroid / weights
+	
 	var midpoint
+	
 	if furthestPlayer != null:
 		midpoint = (furthestPlayer.global_position + ball.global_position) / 2.0
 	else:
 		midpoint = (ball.global_position) 
-	global_position = global_position.lerp(midpoint, 5 * delta)
+	global_position = global_position.lerp(centroid, 5 * delta)
 	
