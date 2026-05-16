@@ -10,6 +10,8 @@ const SHOOTINGVELOCITY = 450.0
 const BALL_HANDLING_DISTANCE = 12
 
 var device_num: int
+var player_id: int
+
 
 var button_bindings = {
 	"interact": [JOY_BUTTON_X, KEY_F],
@@ -227,6 +229,13 @@ func _on_ball_pickup_body_entered(body: Node2D) -> void:
 		held_ball.freeze = true
 		held_ball.linear_velocity = Vector2.ZERO
 		held_ball.angular_velocity = 0
+		
+#		assign the player id to ball to identify 
+#		which player is holding the ball
+
+		held_ball.held_by = player_id
+		
+		
 #		freeze pauses the physics effects on the ball
 #		along with reparent and updateBallPos setting 
 #		the ball to a fixed distance in front of the player

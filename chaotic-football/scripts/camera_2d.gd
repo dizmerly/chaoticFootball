@@ -14,7 +14,9 @@ const MAX_ZOOM = 3.0
 const ZOOM_DISTANCE = 400.0 
 const MARGIN = 2
 const BALL_WEIGHT = 2
+const LERP_WEIGHT = 5
 var margin = 20 #px
+
 
 
 func _ready() -> void:
@@ -37,7 +39,8 @@ func _physics_process(delta: float) -> void:
 	var t = clamp(max_dist/ZOOM_DISTANCE, 0.0, 1.0)
 	t = pow(t, 2)
 	var target_zoom = lerp(MAX_ZOOM, MIN_ZOOM, t)
-	zoom = zoom.lerp(Vector2(target_zoom, target_zoom), 5 * delta)
+#	goal of multiplying delta is to make zoom a smooth transition. 
+	zoom = zoom.lerp(Vector2(target_zoom, target_zoom), LERP_WEIGHT * delta)
 	
 	
 	var weights = players.size() + BALL_WEIGHT
@@ -48,12 +51,17 @@ func _physics_process(delta: float) -> void:
 		centroid = centroid + p.global_position 
 	
 	centroid = centroid / weights
+	global_position = global_position.lerp(centroid, LERP_WEIGHT * delta)
 	
-	var midpoint
+
 	
-	if furthestPlayer != null:
-		midpoint = (furthestPlayer.global_position + ball.global_position) / 2.0
-	else:
-		midpoint = (ball.global_position) 
-	global_position = global_position.lerp(centroid, 5 * delta)
-	
+#	Deprecated code, no longer need midpoints here, 
+#	using centroids now
+#	
+	#var midpoint
+	#
+	#if furthestPlayer != null:
+		#midpoint = (furthestPlayer.global_position + ball.global_position) / 2.0
+	#else:
+		#midpoint = (ball.global_position) 
+		#

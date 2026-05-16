@@ -13,4 +13,4 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("ball"):
-		print("GOAL!")
+		print("GOAL BY Player ", body.held_by, " !")

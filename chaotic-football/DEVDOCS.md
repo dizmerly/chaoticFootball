@@ -27,3 +27,8 @@ of the characters from the ball, and the center point of the
 viewport will be some sort of offset of that. as in like if 
 2 players are equidistant from the ball, the the center is will
 just land at balls position since the distance	
+
+
+
+TODO:
+Add a menu screen, along with an active scoreboard. 
