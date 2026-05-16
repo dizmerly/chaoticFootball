@@ -8,6 +8,7 @@ const JUMP_VELOCITY = -400.0
 const BALLDIST = 12
 const SHOOTINGVELOCITY = 450.0
 const BALL_HANDLING_DISTANCE = 12
+const BALL_PICKUP_DELAY = 0.01
 
 var device_num: int
 var player_id: int
@@ -166,7 +167,7 @@ func shoot_ball():
 	
 
 	held_ball = null
-	await get_tree().create_timer(0.05).timeout
+	await get_tree().create_timer(BALL_PICKUP_DELAY).timeout
 	pickupArea.monitoring = true
 	
 
