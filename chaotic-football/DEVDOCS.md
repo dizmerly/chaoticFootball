@@ -28,7 +28,10 @@ viewport will be some sort of offset of that. as in like if
 2 players are equidistant from the ball, the the center is will
 just land at balls position since the distance	
 
-
-
 TODO:
 Add a menu screen, along with an active scoreboard. 
+
+TODO: 
+Try to make the rocket jump style move with the ball an actualy feature,
+it seems like a super cool and fun move that rewards game exploration,
+and it opens up the cieling for skillful movement
