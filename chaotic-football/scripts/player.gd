@@ -23,7 +23,8 @@ var button_bindings = {
 var axis_bindings = {
 	"horizontal": [JOY_AXIS_LEFT_X],
 	"vertical": [JOY_AXIS_LEFT_Y],
-	"interact": [JOY_AXIS_TRIGGER_RIGHT]
+	"interact": [JOY_AXIS_TRIGGER_RIGHT],
+	"jump" : [JOY_AXIS_TRIGGER_LEFT]
 }
 
 
