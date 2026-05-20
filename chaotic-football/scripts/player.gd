@@ -9,6 +9,7 @@ const BALLDIST = 12
 const SHOOTINGVELOCITY = 450.0
 const BALL_HANDLING_DISTANCE = 12
 const BALL_PICKUP_DELAY = 0.01
+const DEADZONE = 0.5
 
 var device_num: int
 var player_id: int
@@ -60,15 +61,25 @@ func _input(event: InputEvent):
 	
 	if _is_roller:
 		if event.device != device_num: return
-		if not event is InputEventJoypadButton: return
 		
-		# Handle jump
-		if event.button_index in button_bindings["jump"] and event.pressed:
-			jump()
-		#	shooting ball mechanics via interaction
-		if event.button_index in button_bindings["interact"] and event.pressed:
-			if held_ball != null:
-				shoot_ball()
+		# Handle joypad buttons
+		if event is InputEventJoypadButton:
+			# Handle jump
+			if event.button_index in button_bindings["jump"] and event.pressed:
+				jump()
+			#	shooting ball mechanics via interaction
+			if event.button_index in button_bindings["interact"] and event.pressed:
+				if held_ball != null:
+					shoot_ball()
+					
+		if event is InputEventJoypadMotion:
+			if event.axis in axis_bindings["jump"]:
+				jump()
+				
+			if event.axis in axis_bindings["interact"] \
+			and event.axis_value < DEADZONE:
+				if held_ball != null:
+					shoot_ball()
 	else:
 		if not event is InputEventKey: return
 		if not event.pressed or event.echo: return
