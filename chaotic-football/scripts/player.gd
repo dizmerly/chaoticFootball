@@ -6,7 +6,6 @@ const MAX_SPEED = 500.0
 const RUN_SPEED_MULT = 1.1
 const JUMP_VELOCITY = -400.0
 const BALLDIST = 12
-const SHOOTINGVELOCITY = 450.0
 const BALL_HANDLING_DISTANCE = 12
 const BALL_PICKUP_DELAY = 0.01
 const DEADZONE = 0.5
@@ -18,7 +17,9 @@ var player_id: int
 var button_bindings = {
 	"interact": [JOY_BUTTON_X, KEY_F],
 	"jump": [JOY_BUTTON_A, KEY_SPACE],
-	"run": [JOY_BUTTON_B, KEY_SHIFT]
+	"run": [JOY_BUTTON_B, KEY_SHIFT],
+	"ability": [JOY_BUTTON_Y],
+	"useTool": [JOY_BUTTON_DPAD_UP]
 }
 
 var axis_bindings = {
@@ -154,30 +155,8 @@ func jump() -> void:
 
 func shoot_ball():
 	pickupArea.monitoring = false
-	
-	
-#	turning collisions back on
-#	TODO: fix arbitrary values here, make sure that layers have 
-#	actual variable names
-	held_ball.set_collision_layer_value(3, true)
-	held_ball.set_collision_mask_value(1, true)
-#	reset velocity
-	held_ball.linear_velocity = Vector2.ZERO
-	held_ball.angular_velocity = 0
-	
-	var shoot_direction
-	
-#	find velocity vector
-	if _is_roller:
-		shoot_direction = get_stick_dir()
-	else:
-		shoot_direction = get_mouse_dir()
-		
-	held_ball.freeze_mode = RigidBody2D.FREEZE_MODE_STATIC
-	held_ball.freeze = false
-	held_ball.apply_impulse(shoot_direction * SHOOTINGVELOCITY)
-	
-
+	var direction = get_stick_dir() if _is_roller else get_mouse_dir()
+	held_ball.shoot(direction)
 	held_ball = null
 	await get_tree().create_timer(BALL_PICKUP_DELAY).timeout
 	pickupArea.monitoring = true

@@ -35,3 +35,10 @@ TODO:
 Try to make the rocket jump style move with the ball an actualy feature,
 it seems like a super cool and fun move that rewards game exploration,
 and it opens up the cieling for skillful movement
+
+
+TODO:
+Whenever there is no ball in possession, the action button should 
+emit a force field to throw the ball out of the other players possession
+If the ball is in the players possession, then the player upon action 
+button just shoots the ball. 

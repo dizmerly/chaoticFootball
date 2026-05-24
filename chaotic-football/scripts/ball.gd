@@ -3,11 +3,22 @@ extends RigidBody2D
 
 @onready var player = $"../Player"
 
-var held_by = 0
+var held_by
+
+const SHOOTINGVELOCITY = 450.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	add_to_group("ball")
+
+func shoot(direction: Vector2):
+	set_collision_layer_value(3, true)
+	set_collision_mask_value(1, true)
+	linear_velocity = Vector2.ZERO
+	angular_velocity = 0
+	freeze_mode = RigidBody2D.FREEZE_MODE_STATIC
+	freeze = false
+	apply_impulse(direction * SHOOTINGVELOCITY)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
