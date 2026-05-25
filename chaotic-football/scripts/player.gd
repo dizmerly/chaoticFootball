@@ -13,13 +13,12 @@ const DEADZONE = 0.5
 var device_num: int
 var player_id: int
 
-
 var button_bindings = {
 	"interact": [JOY_BUTTON_X, KEY_F],
 	"jump": [JOY_BUTTON_A, KEY_SPACE],
 	"run": [JOY_BUTTON_B, KEY_SHIFT],
-	"ability": [JOY_BUTTON_Y],
-	"useTool": [JOY_BUTTON_DPAD_UP]
+	"useAbility": [JOY_BUTTON_Y],
+	"summonAbility": [JOY_BUTTON_DPAD_UP]
 }
 
 var axis_bindings = {
@@ -42,6 +41,10 @@ enum States {IDLE, RUNNING, JUMPING, HOLDING, THROWING}
 var current_state = States.IDLE
 
 var _is_roller = false
+
+@onready var ray = $ClosestGround
+var abilities: Array = []
+
 
 func _ready() -> void:
 	add_to_group("player")
@@ -72,7 +75,13 @@ func _input(event: InputEvent):
 			if event.button_index in button_bindings["interact"] and event.pressed:
 				if held_ball != null:
 					shoot_ball()
-					
+				else:
+					reposess()
+			if event.button_index in button_bindings["summonAbility"] and event.pressed:
+				abilities[0].summon()
+			
+			if event.button_index in button_bindings["useAbility"] and event.pressed:
+				abilities[0].use()
 		if event is InputEventJoypadMotion:
 			if event.axis in axis_bindings["jump"]:
 				jump()
@@ -160,7 +169,9 @@ func shoot_ball():
 	held_ball = null
 	await get_tree().create_timer(BALL_PICKUP_DELAY).timeout
 	pickupArea.monitoring = true
-	
+
+func reposess():
+	pass
 
 func _physics_process(delta: float) -> void:
 	update_animation()
@@ -236,3 +247,9 @@ func _on_ball_pickup_body_entered(body: Node2D) -> void:
 		held_ball.set_collision_mask_value(1, false)
 		
 		update_ball_pos(BALLDIST)
+
+
+func _on_reposess_body_entered(body: Node2D) -> void:
+	if body.is_in_group("ball") and held_ball == null:
+		pass
+		

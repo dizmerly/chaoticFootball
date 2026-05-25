@@ -8,6 +8,11 @@ var input_maps: Array = []
 #reference to camera
 @onready var camera = $Camera2D
 
+# later on, alter this to where you prepend the location of scene instead of hardcoded
+# i.e. instead of "BONFIRE" : "res://scenes/bonfire.tscn", it should be
+# "BONFIRE" : "bonfire.tscn"
+var abilities = {"BONFIRE" : "res://scenes/bonfire.tscn"}
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var new_connection: int
@@ -30,13 +35,30 @@ func roller_connection_changed(device: int, connected: bool):
 		pass
 		# TODO: remove player function here in the future
 
-func add_player(player_index):
+func add_player(player_index, ability_selection = "bonfire"):
+	#TODO
+	#add code here that controls what abilities the players have access to. 
 	var player = load("res://scenes/player.tscn").instantiate()
 	player.device_num = player_index
 	player.player_id = player_index
+	
+	# Adding player abilities
+	
+	var player_abilities: Array = []
+	if abilities.has(ability_selection.to_upper()):
+		var ability = load(abilities[ability_selection.to_upper()]).instantiate()
+		add_child(ability)
+		ability.owned_by = player.player_id
+		player_abilities.append(ability)
+	else:
+		print("[WARNING] Bad String for ability")
+		
+	player.abilities = player_abilities
+	
 	add_child(player)
 	players.append(player)
 	camera.players.append(player) # add player to list collection in camera
+	
 	
 	print(players)
 	

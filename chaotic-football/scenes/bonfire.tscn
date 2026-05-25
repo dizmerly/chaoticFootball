@@ -8,7 +8,7 @@
 size = Vector2(13, 10)
 
 [sub_resource type="Animation" id="Animation_xk3wp"]
-length = 0.001
+length = 1.0333333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -64,9 +64,9 @@ speed_scale = 0.2
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1385752978]
 material = SubResource("ShaderMaterial_xk3wp")
-instance_shader_parameters/GlowColor = Color(1.5204437, 0.9208677, 0, 1)
+instance_shader_parameters/GlowColor = Color(1.4954206, 0.9056331, 0, 1)
 instance_shader_parameters/Mask_Color = Color(1, 0.63529414, 0.07058824, 1)
-instance_shader_parameters/tolerance = 0.18900000827898
+instance_shader_parameters/tolerance = 0.29800001345648
 position = Vector2(0, -8)
 texture = ExtResource("1_4psdg")
 hframes = 5
