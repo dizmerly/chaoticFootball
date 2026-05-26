@@ -8,7 +8,9 @@ const JUMP_VELOCITY = -400.0
 const BALLDIST = 12
 const BALL_HANDLING_DISTANCE = 12
 const BALL_PICKUP_DELAY = 0.01
+const BALL_REPOSSESSION_DELAY = 0.1
 const DEADZONE = 0.5
+const REPOSSESSION_MULTIPLIER = 0.69
 
 var device_num: int
 var player_id: int
@@ -36,6 +38,9 @@ var axis_bindings = {
 @onready var pickupArea = $BallPickup
 var held_ball = null
 
+@onready var repossessArea = $Repossess
+var trying_repossession: bool= false
+
 #state machine 
 enum States {IDLE, RUNNING, JUMPING, HOLDING, THROWING}
 var current_state = States.IDLE
@@ -49,7 +54,7 @@ var abilities: Array = []
 func _ready() -> void:
 	add_to_group("player")
 	pickupArea.body_entered.connect(_on_ball_pickup_body_entered)
-
+	#repossessArea.body_entered.connect(_on_reposess_body_entered)
 
 func _input(event: InputEvent):
 	if event is InputEventMouseButton or event is InputEventMouseMotion:
@@ -76,7 +81,7 @@ func _input(event: InputEvent):
 				if held_ball != null:
 					shoot_ball()
 				else:
-					reposess()
+					repossess()
 			if event.button_index in button_bindings["summonAbility"] and event.pressed:
 				abilities[0].summon()
 			
@@ -90,14 +95,19 @@ func _input(event: InputEvent):
 			and event.axis_value < DEADZONE:
 				if held_ball != null:
 					shoot_ball()
+				else:
+					repossess() 
 	else:
 		if not event is InputEventKey: return
 		if not event.pressed or event.echo: return
 		
 		if event.keycode in button_bindings["jump"]:
 			jump()
-		if event.keycode in button_bindings["interact"] and held_ball != null:
-			shoot_ball()
+		if event.keycode in button_bindings["interact"]:
+			if held_ball != null:
+				shoot_ball()
+			else:
+				repossess()
 		
 		
 # 0.2 deadzone here same as boilerplate
@@ -170,8 +180,33 @@ func shoot_ball():
 	await get_tree().create_timer(BALL_PICKUP_DELAY).timeout
 	pickupArea.monitoring = true
 
-func reposess():
-	pass
+func repossess():
+	var bodies = repossessArea.get_overlapping_bodies()
+	for body in bodies:
+		if body.is_in_group("ball") and held_ball == null:
+			if body.held_by != null:
+				
+
+				var ball_owner
+				var players = get_tree().get_nodes_in_group("player")
+				for p in players:
+					if p.player_id == body.held_by:
+						ball_owner = p
+				ball_owner.held_ball = null
+				body.held_by = null
+				var direction = get_stick_dir() if _is_roller else get_mouse_dir()
+				
+				
+#				probably really stupid solution here, TODO fix this in the future
+				body.add_collision_exception_with(ball_owner)
+				ball_owner.pickupArea.monitoring = false
+				pickupArea.monitoring = false
+				body.shoot(direction, REPOSSESSION_MULTIPLIER)
+				await get_tree().create_timer(BALL_REPOSSESSION_DELAY).timeout
+				body.remove_collision_exception_with(ball_owner)
+				ball_owner.pickupArea.monitoring = true
+				pickupArea.monitoring = true
+				
 
 func _physics_process(delta: float) -> void:
 	update_animation()
@@ -248,8 +283,4 @@ func _on_ball_pickup_body_entered(body: Node2D) -> void:
 		
 		update_ball_pos(BALLDIST)
 
-
-func _on_reposess_body_entered(body: Node2D) -> void:
-	if body.is_in_group("ball") and held_ball == null:
-		pass
-		
+					

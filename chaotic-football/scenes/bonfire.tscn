@@ -52,6 +52,8 @@ shader = ExtResource("2_jmhiw")
 script = ExtResource("1_xk3wp")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1609673907]
+collision_layer = 0
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=217371801]
 position = Vector2(0.5, -5)
