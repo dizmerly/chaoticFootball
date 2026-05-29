@@ -80,8 +80,8 @@ radius = 4.0
 height = 14.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
-radius = 8.009208
-height = 23.99974
+radius = 15.99518
+height = 43.990234
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3vyb7"]
 radius = 39.012817
@@ -107,7 +107,6 @@ shape = SubResource("CapsuleShape2D_3vyb7")
 [node name="Player" type="Node2D" parent="." unique_id=718855102]
 
 [node name="BallPickup" type="Area2D" parent="." unique_id=1646018701]
-visible = false
 collision_layer = 4
 collision_mask = 4
 
@@ -120,6 +119,7 @@ target_position = Vector2(0, 1000)
 collision_mask = 2
 
 [node name="Repossess" type="Area2D" parent="." unique_id=2021466634]
+visible = false
 collision_layer = 0
 collision_mask = 16
 
