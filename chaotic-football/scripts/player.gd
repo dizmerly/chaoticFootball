@@ -7,7 +7,7 @@ const RUN_SPEED_MULT = 1.1
 const JUMP_VELOCITY = -400.0
 const BALLDIST = 12
 const BALL_HANDLING_DISTANCE = 12
-const BALL_PICKUP_DELAY = 0.01
+const BALL_PICKUP_DELAY = 0.1
 const BALL_REPOSSESSION_DELAY = 0.1
 const DEADZONE = 0.5
 const REPOSSESSION_MULTIPLIER = 0.69
@@ -48,6 +48,7 @@ var current_state = States.IDLE
 var _is_roller = false
 
 @onready var ray = $ClosestGround
+@onready var ball_ray = $BallRayCast
 var abilities: Array = []
 
 
@@ -153,10 +154,13 @@ func update_ball_pos(dist):
 	else:
 		offset = get_mouse_dir() * BALL_HANDLING_DISTANCE
 		#
-	#if sprite.flip_h:
-		#offset.x = - dist
 		
-	held_ball.global_position = global_position + offset
+	ball_ray.target_position = offset
+	ball_ray.force_raycast_update()
+	if ball_ray.is_colliding():
+		held_ball.global_position = ball_ray.get_collision_point() + ball_ray.get_collision_normal() * 5.5
+	else:
+		held_ball.global_position = global_position + offset
 
 	
 func update_animation() -> void:
@@ -175,10 +179,19 @@ func jump() -> void:
 func shoot_ball():
 	pickupArea.monitoring = false
 	var direction = get_stick_dir() if _is_roller else get_mouse_dir()
-	held_ball.shoot(direction)
+	
+	var shot_ball = held_ball
+#	These collision exceptions do make ball collisions more correct, but removes ball jumping.
+	#shot_ball.add_collision_exception_with(self)
+	
+	shot_ball.shoot(direction)
 	held_ball = null
+	
 	await get_tree().create_timer(BALL_PICKUP_DELAY).timeout
 	pickupArea.monitoring = true
+	
+	#if is_instance_valid(shot_ball):
+		#shot_ball.remove_collision_exception_with(self)
 
 func repossess():
 	var bodies = repossessArea.get_overlapping_bodies()
@@ -260,7 +273,7 @@ func _physics_process(delta: float) -> void:
 func _on_ball_pickup_body_entered(body: Node2D) -> void:
 	#print("player interacts with", body)
 	if body.is_in_group("ball") and held_ball == null:
-		print("player picked up the ball")
+		#print("player picked up the ball")
 #		assign ball to player
 		held_ball = body
 		held_ball.freeze_mode = RigidBody2D.FREEZE_MODE_KINEMATIC
