@@ -29,7 +29,7 @@ var axis_bindings = {
 	"interact": [JOY_AXIS_TRIGGER_RIGHT],
 	"jump" : [JOY_AXIS_TRIGGER_LEFT]
 }
-
+		
 
 @onready var sprite = $Sprite2D
 @onready var anim = $AnimationPlayer
@@ -97,7 +97,7 @@ func _input(event: InputEvent):
 				if held_ball != null:
 					shoot_ball()
 				else:
-					repossess() 
+					repossess()
 	else:
 		if not event is InputEventKey: return
 		if not event.pressed or event.echo: return
@@ -164,13 +164,13 @@ func update_ball_pos(dist):
 
 	
 func update_animation() -> void:
-		match current_state:
-			States.IDLE:
-				anim.play("idle")
-			States.RUNNING:
-				anim.play("running")
-			States.JUMPING:
-				anim.play("jumping")
+	match current_state:
+		States.IDLE:
+			anim.play("idle")
+		States.RUNNING:
+			anim.play("running")
+		States.JUMPING:
+			anim.play("jumping")
 
 func jump() -> void:
 	if is_on_floor():

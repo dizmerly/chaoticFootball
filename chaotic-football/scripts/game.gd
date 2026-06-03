@@ -21,6 +21,9 @@ func _ready() -> void:
 #	assigns it some sort of value, that is stored in this 
 #	new connection variable
 	new_connection = Input.joy_connection_changed.connect(roller_connection_changed)
+	if Input.get_connected_joypads().size() == 0:
+#		Debug player, meant for mouse and keyboard.
+		add_player(-1)
 
 
 
