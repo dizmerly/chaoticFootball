@@ -1,9 +1,12 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
-const MAX_SPEED = 500.0
-const RUN_SPEED_MULT = 1.1
+const SPEED = 500.0
+const MAX_SPEED = 600.0
+const ACCELERATION = 1200
+#Eventually, this friction value should depend on the surface player is on
+const FRICTION = 3000
+const DRAG = 900
 const JUMP_VELOCITY = -400.0
 const BALLDIST = 12
 const BALL_HANDLING_DISTANCE = 12
@@ -29,7 +32,7 @@ var axis_bindings = {
 	"interact": [JOY_AXIS_TRIGGER_RIGHT],
 	"jump" : [JOY_AXIS_TRIGGER_LEFT]
 }
-		
+
 
 @onready var sprite = $Sprite2D
 @onready var anim = $AnimationPlayer
@@ -97,7 +100,7 @@ func _input(event: InputEvent):
 				if held_ball != null:
 					shoot_ball()
 				else:
-					repossess()
+					repossess() 
 	else:
 		if not event is InputEventKey: return
 		if not event.pressed or event.echo: return
@@ -158,19 +161,20 @@ func update_ball_pos(dist):
 	ball_ray.target_position = offset
 	ball_ray.force_raycast_update()
 	if ball_ray.is_colliding():
-		held_ball.global_position = ball_ray.get_collision_point() + ball_ray.get_collision_normal() * 5.5
+		held_ball.global_position = ball_ray.get_collision_point() \
+		+ ball_ray.get_collision_normal() * 5.5
 	else:
 		held_ball.global_position = global_position + offset
 
 	
 func update_animation() -> void:
-	match current_state:
-		States.IDLE:
-			anim.play("idle")
-		States.RUNNING:
-			anim.play("running")
-		States.JUMPING:
-			anim.play("jumping")
+		match current_state:
+			States.IDLE:
+				anim.play("idle")
+			States.RUNNING:
+				anim.play("running")
+			States.JUMPING:
+				anim.play("jumping")
 
 func jump() -> void:
 	if is_on_floor():
@@ -257,16 +261,26 @@ func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
+	#
+	#if direction != 0 and not is_on_floor():
+		#velocity.x 	= move_toward(velocity.x, direction * MAX_SPEED, ACCELERATION * 2  * delta)
+	#elif direction != 0:
+		#velocity.x 	= move_toward(velocity.x, direction * MAX_SPEED, ACCELERATION * delta)
+	#elif is_on_floor():
+		#velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
+	#else:
+		#velocity.x = move_toward(velocity.x, 0, DRAG * delta)
+	
+#	Raw speed movement
+ 
 	if direction:
 		velocity.x = direction * SPEED
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-	
+		velocity.x = 0
+		 
 
 	move_and_slide()
 	#position = position.round()
-			
-#	handle whether user is using m&k or controller
 	if held_ball != null:
 		update_ball_pos(BALLDIST)
 	
