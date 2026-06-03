@@ -65,6 +65,7 @@ func add_player(player_index, ability_selection = "bonfire"):
 	
 	print(players)
 	
+#TODO add a remove player function. 
 func remove_player(player_index):
 	pass
 	#remove_child()
