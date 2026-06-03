@@ -65,6 +65,8 @@ func add_player(player_index, ability_selection = "bonfire"):
 	
 	print(players)
 	
-	
+func remove_player(player_index):
+	pass
+	#remove_child()
 	
 	
