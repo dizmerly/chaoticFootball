@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-const SPEED = 500.0
+const SPEED = 470.0
 const MAX_SPEED = 600.0
 const ACCELERATION = 1200
 #Eventually, this friction value should depend on the surface player is on

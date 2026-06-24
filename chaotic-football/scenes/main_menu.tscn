@@ -6,7 +6,6 @@
 script = ExtResource("1_l6cm7")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=569111241]
-zoom = Vector2(3, 3)
 
 [node name="ButtonManager" type="Control" parent="." unique_id=1506493071]
 layout_mode = 3
@@ -16,26 +15,26 @@ offset_bottom = 40.0
 
 [node name="StartGame" type="Button" parent="ButtonManager" unique_id=1945222744]
 layout_mode = 0
-offset_left = -23.0
-offset_top = -18.0
-offset_right = 23.0
-offset_bottom = 13.0
+offset_left = -134.0
+offset_top = -85.0
+offset_right = 124.0
+offset_bottom = 74.0
 text = "Start"
 
 [node name="Settings" type="Button" parent="ButtonManager" unique_id=578225681]
 layout_mode = 0
-offset_left = -317.0
-offset_top = -177.0
-offset_right = -247.0
-offset_bottom = -146.0
+offset_left = -932.0
+offset_top = -519.0
+offset_right = -723.0
+offset_bottom = -415.0
 text = "Settings"
 
 [node name="Quit" type="Button" parent="ButtonManager" unique_id=1323961324]
 layout_mode = 0
-offset_left = -317.0
-offset_top = 151.0
-offset_right = -275.0
-offset_bottom = 182.0
+offset_left = -932.0
+offset_top = 399.0
+offset_right = -673.0
+offset_bottom = 522.0
 text = "Quit"
 
 [connection signal="pressed" from="ButtonManager/StartGame" to="." method="_on_start_game_pressed"]

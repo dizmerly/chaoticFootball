@@ -34,6 +34,8 @@ func roller_connection_changed(device: int, connected: bool):
 #		DEBUG
 		#print("Connected device {d}".format({"d":device}))
 		add_player(device)
+#		temporary fix to remove keyboard player. 
+		remove_player(-1)
 	else:
 		pass
 		# TODO: remove player function here in the future
@@ -67,7 +69,12 @@ func add_player(player_index, ability_selection = "bonfire"):
 	
 #TODO add a remove player function. 
 func remove_player(player_index):
-	pass
-	#remove_child()
+	var players = get_tree().get_nodes_in_group("player")
+	var player
+	for p in players:
+		if p.player_id == player_index:
+			player = p
+			
+	remove_child(player)
 	
 	
