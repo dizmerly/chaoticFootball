@@ -6,18 +6,28 @@
 
 ### Functionality
 [x] Basic Gameplay Loop
+
 [x] Ability for the character
+
 [x] Ball physics and scoring goals
+
 [x] Basic Teleport ability
+
 [x] Local Multiplayer
+
 [ ] Online Multiplayer
 
 ### UI
 [ ] Scoreboard
+
 [ ] Local multiplayer controller popup for player to join
+
 [ ] Working Main Menu
+
 [ ] Character selection
+
 [ ] Map selection
+
 [ ] Settings menu with saved settings file
 
 ### Miscellaneous 
@@ -25,6 +35,7 @@
 
 ### Fun extras
 [ ] Level Editor
+
 [ ] Different abilities, with ability to select them
 
 
