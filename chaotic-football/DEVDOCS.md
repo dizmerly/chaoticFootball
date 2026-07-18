@@ -1,13 +1,32 @@
-# Active TODO List
+
+# Task List
 
 
+
+
+### Functionality
 [x] Basic Gameplay Loop
 [x] Ability for the character
 [x] Ball physics and scoring goals
-[] Scoreboard
-[] Working Main Menu
-[] Character selection
-[] Level Editor
+[x] Basic Teleport ability
+[x] Local Multiplayer
+[ ] Online Multiplayer
+
+### UI
+[ ] Scoreboard
+[ ] Local multiplayer controller popup for player to join
+[ ] Working Main Menu
+[ ] Character selection
+[ ] Map selection
+[ ] Settings menu with saved settings file
+
+### Miscellaneous 
+[ ] More character designs
+
+### Fun extras
+[ ] Level Editor
+[ ] Different abilities, with ability to select them
+
 
 
 # TODO's and Bugs
@@ -18,15 +37,11 @@ below, even when the sprite below should be colliding, and
 the ball's collision shape is even large than its sprite, so 
 no idea why this happened. 
 
-BUG 
-When jumping and throwing the ball, if you are reasonably close enough to the goalpost
+BUG When jumping and throwing the ball, if you are reasonably close enough to the goalpost
 you can throw the ball through the collision shape
 FIXED - the problem was that the physics tick speed was too slow 
-(changed to 120) and the physics collision solver is continous now which better
+(changed to 120) and the physics collision solver is continuous now which better
 calculates physics collisions. 
-
-BUG 
-
 
 
 TODO: 

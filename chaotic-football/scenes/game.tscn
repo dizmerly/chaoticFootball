@@ -2253,3 +2253,6 @@ tile_set = SubResource("TileSet_sgl2t")
 
 [node name="Scoreboard" parent="." unique_id=1307151885 instance=ExtResource("24_e1j6l")]
 position = Vector2(0, -512)
+
+[connection signal="scored" from="goalpost" to="." method="_on_goalpost_scored"]
+[connection signal="scored" from="goalpost2" to="." method="_on_goalpost_2_scored"]

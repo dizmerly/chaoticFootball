@@ -1,3 +1,5 @@
+# main game manager
+
 extends Node
 
 # Input pulls how many total controllers connected
@@ -8,6 +10,8 @@ var input_maps: Array = []
 #reference to camera
 @onready var camera = $Camera2D
 
+#reference to scoreboard
+@onready var scoreboard = $Scoreboard
 # later on, alter this to where you prepend the location of scene instead of hardcoded
 # i.e. instead of "BONFIRE" : "res://scenes/bonfire.tscn", it should be
 # "BONFIRE" : "bonfire.tscn"
@@ -77,6 +81,8 @@ func remove_player(player_index):
 			
 	remove_child(player)
 	
-	
+func _on_goalpost_scored(team: int) -> void:
+	scoreboard.addPoint(team)
 
-	
+func _on_goalpost_2_scored(team: int) -> void:
+	scoreboard.addPoint(team)
