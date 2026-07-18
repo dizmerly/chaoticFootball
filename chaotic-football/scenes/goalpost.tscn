@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://cdt8sbsvfrn2d"]
 
+[ext_resource type="Script" uid="uid://bfl28t5jrd4uy" path="res://scripts/goalpost.gd" id="1_cj5pi"]
 [ext_resource type="Script" uid="uid://bfundrxgyj0xs" path="res://scripts/goalArea.gd" id="1_jxhj0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bhbof"]
 
 [node name="goal" type="Node2D" unique_id=2007451905]
+script = ExtResource("1_cj5pi")
 
 [node name="goalArea" type="Area2D" parent="." unique_id=1940559508]
 collision_layer = 9

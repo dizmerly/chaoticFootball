@@ -13,13 +13,22 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="StartGame2" type="Button" parent="ButtonManager" unique_id=1898477648]
+layout_mode = 0
+offset_left = -129.0
+offset_top = 11.0
+offset_right = 129.0
+offset_bottom = 170.0
+text = "Start Map 2
+"
+
 [node name="StartGame" type="Button" parent="ButtonManager" unique_id=1945222744]
 layout_mode = 0
-offset_left = -134.0
-offset_top = -85.0
-offset_right = 124.0
-offset_bottom = 74.0
-text = "Start"
+offset_left = -129.0
+offset_top = -204.0
+offset_right = 129.0
+offset_bottom = -45.0
+text = "Start Map 1"
 
 [node name="Settings" type="Button" parent="ButtonManager" unique_id=578225681]
 layout_mode = 0
@@ -37,6 +46,7 @@ offset_right = -673.0
 offset_bottom = 522.0
 text = "Quit"
 
+[connection signal="pressed" from="ButtonManager/StartGame2" to="." method="_on_start_game_2_pressed"]
 [connection signal="pressed" from="ButtonManager/StartGame" to="." method="_on_start_game_pressed"]
 [connection signal="pressed" from="ButtonManager/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="ButtonManager/Quit" to="." method="_on_quit_pressed"]

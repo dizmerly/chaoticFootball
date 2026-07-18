@@ -78,5 +78,3 @@ func remove_player(player_index):
 	remove_child(player)
 	
 	
-
-	

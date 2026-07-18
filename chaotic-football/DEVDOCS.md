@@ -1,4 +1,16 @@
-# TODO
+# Active TODO List
+
+
+[x] Basic Gameplay Loop
+[x] Ability for the character
+[x] Ball physics and scoring goals
+[] Scoreboard
+[] Working Main Menu
+[] Character selection
+[] Level Editor
+
+
+# TODO's and Bugs
 
 BUG Ball sprite is going into the other sprites really weirldy
 When ball is bouncing, the ball sprite will basically go inside the sprite

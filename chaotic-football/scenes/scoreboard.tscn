@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dkw8mkqyl47hm"]
+
+[ext_resource type="Script" uid="uid://cdxhymg1hamy5" path="res://scripts/scoreboard.gd" id="1_ucmtr"]
+
+[node name="Scoreboard" type="Node2D" unique_id=1307151885]
+z_index = 10
+script = ExtResource("1_ucmtr")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1207986547]
+offset_left = -112.0
+offset_top = -64.0
+offset_right = 112.0
+offset_bottom = 64.0
+
+[node name="ScoreLabel" type="Label" parent="ColorRect" unique_id=449543207]
+layout_mode = 0
+offset_right = 224.0
+offset_bottom = 128.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "
+Player 1: 0 
+
+Player 2: 0 
+"
+horizontal_alignment = 1
