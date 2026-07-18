@@ -42,6 +42,8 @@
 
 # TODO's and Bugs
 
+May/June 2026
+
 BUG Ball sprite is going into the other sprites really weirldy
 When ball is bouncing, the ball sprite will basically go inside the sprite
 below, even when the sprite below should be colliding, and 
