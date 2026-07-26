@@ -1,11 +1,11 @@
-extends Node2D
+extends Control
 
 var teamAScore = 0
 var teamBScore = 0
 
 var WINNING_SCORE = 10
 
-
+@onready var scoreLabel = $ColorRect/ScoreLabel
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

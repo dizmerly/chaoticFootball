@@ -1,25 +1,40 @@
 [gd_scene format=3 uid="uid://dkw8mkqyl47hm"]
 
 [ext_resource type="Script" uid="uid://cdxhymg1hamy5" path="res://scripts/scoreboard.gd" id="1_ucmtr"]
+[ext_resource type="Texture2D" uid="uid://jva412prvijh" path="res://assets/SoccerGame/Upperbanner.png" id="1_w5fga"]
+[ext_resource type="FontFile" uid="uid://cy5p8l8p0aaj4" path="res://assets/fonts/Minecraft.ttf" id="2_w5fga"]
 
-[node name="Scoreboard" type="Node2D" unique_id=1307151885]
-z_index = 10
+[sub_resource type="LabelSettings" id="LabelSettings_bbtho"]
+font = ExtResource("2_w5fga")
+
+[sub_resource type="LabelSettings" id="LabelSettings_jh1xm"]
+font = ExtResource("2_w5fga")
+
+[node name="Scoreboard" type="Control" unique_id=53497481]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_ucmtr")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1207986547]
-offset_left = -112.0
-offset_top = -64.0
-offset_right = 112.0
-offset_bottom = 64.0
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1163346771]
+texture = ExtResource("1_w5fga")
 
-[node name="ScoreLabel" type="Label" parent="ColorRect" unique_id=449543207]
+[node name="Team A" type="Label" parent="." unique_id=1439502852]
 layout_mode = 0
-offset_right = 224.0
-offset_bottom = 128.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "
-Player 1: 0 
+offset_left = -37.0
+offset_right = 3.0
+offset_bottom = 23.0
+text = "0"
+label_settings = SubResource("LabelSettings_bbtho")
 
-Player 2: 0 
-"
-horizontal_alignment = 1
+[node name="Team B" type="Label" parent="." unique_id=801942632]
+layout_mode = 0
+offset_left = -3.0
+offset_right = 37.0
+offset_bottom = 23.0
+text = "0"
+label_settings = SubResource("LabelSettings_jh1xm")
+horizontal_alignment = 2

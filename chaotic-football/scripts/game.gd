@@ -8,10 +8,10 @@ var players: Array = []
 var input_maps: Array = []
 
 #reference to camera
-@onready var camera = $Camera2D
+@onready var camera = $Map/Camera2D
 
 #reference to scoreboard
-@onready var scoreboard = $Scoreboard
+@onready var scoreboard = $Map/CanvasLayer/Control/VBoxContainer/Control
 # later on, alter this to where you prepend the location of scene instead of hardcoded
 # i.e. instead of "BONFIRE" : "res://scenes/bonfire.tscn", it should be
 # "BONFIRE" : "bonfire.tscn"

@@ -430,4 +430,5 @@ tile_map_data = PackedByteArray("AADk//H/AAAAAAAAAADk//L/AAAAAAAAAADk//P/AAAAAAA
 tile_set = SubResource("TileSet_vhn35")
 
 [node name="Scoreboard" parent="." unique_id=1307151885 instance=ExtResource("22_tcdgs")]
-position = Vector2(0, -576)
+offset_top = -576.0
+offset_bottom = -576.0
