@@ -31,12 +31,15 @@ func _ready() -> void:
 
 
 
-# changes of a controller connecting
+# PLAYER CONNECTION CONTROL 
 func roller_connection_changed(device: int, connected: bool):
 	if connected:
 		num_players = Input.get_connected_joypads().size()
 #		DEBUG
 		#print("Connected device {d}".format({"d":device}))
+		
+		# make a popup in the ui for the player to press a to confirm
+		
 		add_player(device)
 #		temporary fix to remove keyboard player. 
 		remove_player(-1)
@@ -80,6 +83,9 @@ func remove_player(player_index):
 			player = p
 			
 	remove_child(player)
+	
+	
+# HUD CONTROL	
 	
 func _on_goalpost_scored(team: int) -> void:
 	scoreboard.addPoint(team)

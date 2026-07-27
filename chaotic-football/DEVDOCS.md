@@ -82,3 +82,12 @@ Whenever there is no ball in possession, the action button should
 emit a force field to throw the ball out of the other players possession
 If the ball is in the players possession, then the player upon action 
 button just shoots the ball. 
+
+
+
+
+### Timeline
+
+#### 7/26/26
+Finished connecting the scoreboard, values are now correctly updating whenever 
+a goal is scored. Began working on controller confirmation for joining the game. 

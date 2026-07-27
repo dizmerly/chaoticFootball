@@ -22,7 +22,7 @@ script = ExtResource("1_ucmtr")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1163346771]
 texture = ExtResource("1_w5fga")
 
-[node name="Team A" type="Label" parent="." unique_id=1439502852]
+[node name="Team A Score" type="Label" parent="." unique_id=1439502852]
 layout_mode = 0
 offset_left = -37.0
 offset_right = 3.0
@@ -30,7 +30,7 @@ offset_bottom = 23.0
 text = "0"
 label_settings = SubResource("LabelSettings_bbtho")
 
-[node name="Team B" type="Label" parent="." unique_id=801942632]
+[node name="Team B Score" type="Label" parent="." unique_id=801942632]
 layout_mode = 0
 offset_left = -3.0
 offset_right = 37.0
