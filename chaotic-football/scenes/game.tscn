@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://ef2p7e1h8hkv" path="res://assets/SoccerGame/RedGoal.png" id="22_bt5mj"]
 [ext_resource type="PackedScene" uid="uid://dkw8mkqyl47hm" path="res://scenes/scoreboard.tscn" id="24_e1j6l"]
 [ext_resource type="PackedScene" uid="uid://xymcw3sjh8k0" path="res://scenes/controller_confirmation.tscn" id="24_pl11u"]
+[ext_resource type="PackedScene" uid="uid://bj7eqb8fl61ne" path="res://scenes/spawn_point.tscn" id="26_bhx41"]
 
 [sub_resource type="Environment" id="Environment_1kice"]
 background_mode = 3
@@ -2286,6 +2287,12 @@ offset_left = 960.0
 offset_top = 547.76
 offset_right = 1000.0
 offset_bottom = 547.76
+
+[node name="Spawn Point 1" parent="." unique_id=316761136 instance=ExtResource("26_bhx41")]
+position = Vector2(-272, -126)
+
+[node name="Spawn Point 2" parent="." unique_id=1012790983 instance=ExtResource("26_bhx41")]
+position = Vector2(254, -138)
 
 [connection signal="scored" from="Map/goalpost" to="." method="_on_goalpost_scored"]
 [connection signal="scored" from="Map/goalpost2" to="." method="_on_goalpost_2_scored"]

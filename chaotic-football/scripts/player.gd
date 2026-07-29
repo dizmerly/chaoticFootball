@@ -160,6 +160,8 @@ func update_ball_pos(dist):
 		
 	ball_ray.target_position = offset
 	ball_ray.force_raycast_update()
+	
+#	TODO this magic number, what is does the 5.5 do?? 
 	if ball_ray.is_colliding():
 		held_ball.global_position = ball_ray.get_collision_point() \
 		+ ball_ray.get_collision_normal() * 5.5

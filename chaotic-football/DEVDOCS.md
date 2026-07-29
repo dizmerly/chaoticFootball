@@ -91,3 +91,7 @@ button just shoots the ball.
 #### 7/26/26
 Finished connecting the scoreboard, values are now correctly updating whenever 
 a goal is scored. Began working on controller confirmation for joining the game. 
+
+#### 7/28/26
+Pressing A to join implemented, fixed controllers not being recognized when loading from menu.
+Added ball resetting mechanic whenever a goal is scored.

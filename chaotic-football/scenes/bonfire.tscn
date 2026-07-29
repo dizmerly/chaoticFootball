@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://23bfneybtubq"]
 
 [ext_resource type="Texture2D" uid="uid://twqa2cp5fyg4" path="res://assets/SoccerGame/Bonfire.png" id="1_4psdg"]
-[ext_resource type="Script" uid="uid://4uyd8rudei06" path="res://bonfire.gd" id="1_xk3wp"]
+[ext_resource type="Script" uid="uid://4uyd8rudei06" path="res://scripts/bonfire.gd" id="1_xk3wp"]
 [ext_resource type="Shader" uid="uid://mlxyoumygoii" path="res://scenes/bonfire.tres" id="2_jmhiw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xk3wp"]

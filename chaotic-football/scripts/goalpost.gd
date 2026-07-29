@@ -3,6 +3,7 @@ extends Node2D
 @export var goalId: int = 0
 signal scored(team: int)
 
+
 # Assuming your child Area2D is named "GoalArea". If it's named something else,
 # update the path here (e.g., $Area2D)
 @onready var goalArea = $goalArea 

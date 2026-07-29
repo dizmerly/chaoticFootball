@@ -22,6 +22,12 @@ var pending_devices: Array = []
 # "BONFIRE" : "bonfire.tscn"
 var abilities = {"BONFIRE" : "res://scenes/bonfire.tscn"}
 
+#REFERENCES TO OBJECTS IN GAME
+@onready var ball: RigidBody2D = $Map/Ball
+@onready var spawn_point_1: Marker2D = $"Spawn Point 1"
+
+
+
 
 func _ready() -> void:
 	Input.joy_connection_changed.connect(roller_connection_changed)
@@ -106,9 +112,15 @@ func remove_player(player_index):
 	
 func _on_goalpost_scored(team: int) -> void:
 	scoreboard.addPoint(team)
+	ball.reset.call_deferred()
+	players[0].global_position = spawn_point_1.global_position
+	
 
 func _on_goalpost_2_scored(team: int) -> void:
 	scoreboard.addPoint(team)
+	ball.reset.call_deferred()
+	players[0].global_position = spawn_point_1.global_position
+
 
 
 func _on_controller_confirmation_pressed_a(controller_id: int) -> void:
