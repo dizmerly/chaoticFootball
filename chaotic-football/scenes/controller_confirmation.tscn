@@ -2,25 +2,14 @@
 
 [ext_resource type="Script" uid="uid://be7lnpfp0ma55" path="res://scripts/controller_confirmation.gd" id="1_ju35m"]
 [ext_resource type="Texture2D" uid="uid://c4orf6utsarv4" path="res://assets/SoccerGame/Controller.png" id="1_m5i43"]
+[ext_resource type="FontFile" uid="uid://cy5p8l8p0aaj4" path="res://assets/fonts/Minecraft.ttf" id="3_egi3v"]
 
 [sub_resource type="Animation" id="Animation_ju35m"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
+length = 2.1
 
 [sub_resource type="Animation" id="Animation_egi3v"]
 resource_name = "press_a"
-length = 0.8
+length = 0.6666667
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -29,7 +18,7 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.56666666, 0.6666667),
+"times": PackedFloat32Array(0, 0.4, 0.56666666),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [0, 1, 2]
@@ -41,6 +30,13 @@ _data = {
 &"press_a": SubResource("Animation_egi3v")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_bbtho"]
+font = ExtResource("3_egi3v")
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 0.554)
+
 [node name="Controller_Confirmation" type="Control" unique_id=2010939331]
 layout_mode = 3
 anchors_preset = 15
@@ -48,6 +44,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(-73, -43)
 script = ExtResource("1_ju35m")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1972590704]
@@ -57,5 +54,24 @@ autoplay = &"press_a"
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1573128742]
 texture = ExtResource("1_m5i43")
 hframes = 3
+
+[node name="Label" type="Label" parent="." unique_id=1412360196]
+layout_mode = 0
+offset_left = -128.0
+offset_top = -64.0
+offset_right = 129.0
+offset_bottom = -41.0
+text = "Player <id>, Press A or equivalent"
+label_settings = SubResource("LabelSettings_bbtho")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1897166752]
+z_index = -2
+layout_mode = 0
+offset_left = -144.0
+offset_top = -96.0
+offset_right = 144.0
+offset_bottom = 80.0
+mouse_filter = 2
+color = Color(0.43502748, 0.63096863, 0.70959955, 1)
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]

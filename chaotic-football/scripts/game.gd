@@ -7,6 +7,11 @@ var num_players = Input.get_connected_joypads().size()
 var players: Array = []
 var input_maps: Array = []
 
+# Array for processing connected controllers
+var pending_devices: Array = []
+@onready var join_popup: Panel = $Map/CanvasLayer/JoinPopup
+
+
 #reference to camera
 @onready var camera = $Map/Camera2D
 
@@ -17,21 +22,29 @@ var input_maps: Array = []
 # "BONFIRE" : "bonfire.tscn"
 var abilities = {"BONFIRE" : "res://scenes/bonfire.tscn"}
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	var new_connection: int
 
-#	this catches the signal of a new controller
-#	assigns it some sort of value, that is stored in this 
-#	new connection variable
-	new_connection = Input.joy_connection_changed.connect(roller_connection_changed)
-	if Input.get_connected_joypads().size() == 0:
-#		Debug player, meant for mouse and keyboard.
+func _ready() -> void:
+	Input.joy_connection_changed.connect(roller_connection_changed)
+	
+	# Get a list of all controllers currently plugged in right now
+	var connected_rollers = Input.get_connected_joypads()
+	
+	if connected_rollers.size() == 0:
+		# Keep your debug keyboard code
 		add_player(-1)
+	else:
+		# Loop through the already connected controllers!
+		for roller_id in connected_rollers:
+			pending_devices.append(roller_id)
+			
+		# Since there are people waiting, show the popup right away!
+		join_popup.show()
 
 
 
 # PLAYER CONNECTION CONTROL 
+
+# adds players to an array that tracks which devices havent yet been connected
 func roller_connection_changed(device: int, connected: bool):
 	if connected:
 		num_players = Input.get_connected_joypads().size()
@@ -40,7 +53,11 @@ func roller_connection_changed(device: int, connected: bool):
 		
 		# make a popup in the ui for the player to press a to confirm
 		
-		add_player(device)
+		
+		pending_devices.append(device)
+		
+		join_popup.show()
+		
 #		temporary fix to remove keyboard player. 
 		remove_player(-1)
 	else:
@@ -92,3 +109,10 @@ func _on_goalpost_scored(team: int) -> void:
 
 func _on_goalpost_2_scored(team: int) -> void:
 	scoreboard.addPoint(team)
+
+
+func _on_controller_confirmation_pressed_a(controller_id: int) -> void:
+	if controller_id in pending_devices:
+		add_player(controller_id)
+		pending_devices.erase(controller_id)
+	join_popup.hide()
