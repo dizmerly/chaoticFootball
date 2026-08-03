@@ -26,6 +26,7 @@ var abilities = {"BONFIRE" : "res://scenes/bonfire.tscn"}
 @onready var ball: RigidBody2D = $Map/Ball
 @onready var spawn_point_1: Marker2D = $"Spawn Point 1"
 
+@onready var spawn_point_2: Marker2D = $"Spawn Point 2"
 
 
 
@@ -35,16 +36,16 @@ func _ready() -> void:
 	# Get a list of all controllers currently plugged in right now
 	var connected_rollers = Input.get_connected_joypads()
 	
-	if connected_rollers.size() == 0:
-		# Keep your debug keyboard code
-		add_player(-1)
-	else:
-		# Loop through the already connected controllers!
-		for roller_id in connected_rollers:
-			pending_devices.append(roller_id)
-			
-		# Since there are people waiting, show the popup right away!
-		join_popup.show()
+	#if connected_rollers.size() == 0:
+		## Keep your debug keyboard code
+		#add_player(-1)
+	#else:
+		## Loop through the already connected controllers!
+		#for roller_id in connected_rollers:
+			#pending_devices.append(roller_id)
+			#
+		## Since there are people waiting, show the popup right away!
+		#join_popup.show()
 
 
 
@@ -119,7 +120,11 @@ func _on_goalpost_scored(team: int) -> void:
 func _on_goalpost_2_scored(team: int) -> void:
 	scoreboard.addPoint(team)
 	ball.reset.call_deferred()
-	players[0].global_position = spawn_point_1.global_position
+#	super temporary stupid approach, but just works for now
+	if players.size() > 0:
+		players[0].global_position = spawn_point_1.global_position
+	if players.size() > 1:
+		players[1].global_position = spawn_point_2.global_position
 
 
 
@@ -127,4 +132,5 @@ func _on_controller_confirmation_pressed_a(controller_id: int) -> void:
 	if controller_id in pending_devices:
 		add_player(controller_id)
 		pending_devices.erase(controller_id)
-	join_popup.hide()
+	if pending_devices.is_empty():
+		join_popup.hide()

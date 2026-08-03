@@ -15,6 +15,8 @@ const BALL_REPOSSESSION_DELAY = 0.1
 const DEADZONE = 0.5
 const REPOSSESSION_MULTIPLIER = 0.69
 
+const SHOOTING_RUMBLE_DURATION = 0.2
+
 var device_num: int
 var player_id: int
 
@@ -34,8 +36,12 @@ var axis_bindings = {
 }
 
 
-@onready var sprite = $Sprite2D
+@onready var sprite: Sprite2D = $"Player Skin"
 @onready var anim = $AnimationPlayer
+
+@onready var shockwave_frames: Sprite2D = $Repossess/ShockwaveFrames
+@onready var shockwave_animation: AnimationPlayer = $Repossess/ShockwaveAnimation
+
 
 #ball handling
 @onready var pickupArea = $BallPickup
@@ -59,6 +65,8 @@ func _ready() -> void:
 	add_to_group("player")
 	pickupArea.body_entered.connect(_on_ball_pickup_body_entered)
 	#repossessArea.body_entered.connect(_on_reposess_body_entered)
+	shockwave_animation.animation_finished.connect(func(anim_name): 
+		shockwave_frames.hide())
 
 func _input(event: InputEvent):
 	if event is InputEventMouseButton or event is InputEventMouseMotion:
@@ -86,21 +94,39 @@ func _input(event: InputEvent):
 					shoot_ball()
 				else:
 					repossess()
+#				play shockwave animation for interaction
+				shockwave_frames.show()
+				shockwave_animation.play("shockwave")
+				#interaction vibration/rumble
+				Input.start_joy_vibration(device_num, 0.5, 0.5, SHOOTING_RUMBLE_DURATION)
+				
+				
 			if event.button_index in button_bindings["summonAbility"] and event.pressed:
 				abilities[0].summon()
 			
 			if event.button_index in button_bindings["useAbility"] and event.pressed:
 				abilities[0].use()
 		if event is InputEventJoypadMotion:
+#			these comments are mainly here to find code quicker with ctrl + F
+#			jumping
 			if event.axis in axis_bindings["jump"]:
 				jump()
 				
+#			trigger motions shooting	
 			if event.axis in axis_bindings["interact"] \
 			and event.axis_value < DEADZONE:
 				if held_ball != null:
 					shoot_ball()
 				else:
 					repossess() 
+#				shockwave animation for interaction
+				shockwave_frames.show()
+				shockwave_animation.stop()
+				shockwave_animation.play("shockwave")
+				
+				#interaction vibration
+				Input.start_joy_vibration(device_num, 0.5, 0.5, SHOOTING_RUMBLE_DURATION)
+
 	else:
 		if not event is InputEventKey: return
 		if not event.pressed or event.echo: return
@@ -222,6 +248,9 @@ func repossess():
 				pickupArea.monitoring = false
 				body.shoot(direction, REPOSSESSION_MULTIPLIER)
 				await get_tree().create_timer(BALL_REPOSSESSION_DELAY).timeout
+				
+
+				
 				body.remove_collision_exception_with(ball_owner)
 				ball_owner.pickupArea.monitoring = true
 				pickupArea.monitoring = true
@@ -311,5 +340,3 @@ func _on_ball_pickup_body_entered(body: Node2D) -> void:
 		held_ball.set_collision_mask_value(1, false)
 		
 		update_ball_pos(BALLDIST)
-
-					

@@ -17,7 +17,7 @@ func _process(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventJoypadButton:
-		if event.button_index == JOY_BUTTON_A: 
+		if event.button_index == JOY_BUTTON_A and event.is_pressed(): 
 			pressed_a.emit(event.device)
 #			DEBUG
 			print("pressed a")

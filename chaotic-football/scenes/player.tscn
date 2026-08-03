@@ -1,13 +1,14 @@
 [gd_scene format=3 uid="uid://disvxy7foj5u"]
 
 [ext_resource type="Script" uid="uid://cetgnntxheonu" path="res://scripts/player.gd" id="1_3vyb7"]
+[ext_resource type="Texture2D" uid="uid://dgdinbn7t2l0k" path="res://assets/SoccerGame/Shockwave 3.png" id="2_g2els"]
 
 [sub_resource type="Animation" id="Animation_3vyb7"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Player Skin:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -22,7 +23,7 @@ resource_name = "idle"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Player Skin:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -37,7 +38,7 @@ resource_name = "jumping"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Player Skin:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -54,7 +55,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Player Skin:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -83,8 +84,45 @@ height = 14.0
 radius = 15.99518
 height = 43.990234
 
+[sub_resource type="Animation" id="Animation_tuyoq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Repossess/ShockwaveFrames:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_qlg0r"]
+resource_name = "shockwave"
+length = 0.36666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Repossess/ShockwaveFrames:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.099999994, 0.13333334, 0.16666667, 0.19999999, 0.23333333, 0.2625941, 0.29107758),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tuyoq"]
+_data = {
+&"RESET": SubResource("Animation_tuyoq"),
+&"shockwave": SubResource("Animation_qlg0r")
+}
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_3vyb7"]
-radius = 39.012817
+radius = 37.01351
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1190138603]
 collision_mask = 6
@@ -93,7 +131,7 @@ script = ExtResource("1_3vyb7")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=853606276]
 libraries/ = SubResource("AnimationLibrary_dqkch")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=356943575]
+[node name="Player Skin" type="Sprite2D" parent="." unique_id=356943575]
 texture_filter = 1
 position = Vector2(1, 0)
 texture = SubResource("CompressedTexture2D_u8vuu")
@@ -124,6 +162,17 @@ collision_mask = 3
 [node name="Repossess" type="Area2D" parent="." unique_id=2021466634]
 collision_layer = 0
 collision_mask = 16
+
+[node name="ShockwaveAnimation" type="AnimationPlayer" parent="Repossess" unique_id=340711402]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_tuyoq")
+
+[node name="ShockwaveFrames" type="Sprite2D" parent="Repossess" unique_id=1770387759]
+visible = false
+z_index = -1
+texture = ExtResource("2_g2els")
+hframes = 4
+vframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Repossess" unique_id=318303085]
 shape = SubResource("CircleShape2D_3vyb7")
