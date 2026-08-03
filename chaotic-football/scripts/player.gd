@@ -35,6 +35,9 @@ var axis_bindings = {
 	"jump" : [JOY_AXIS_TRIGGER_LEFT]
 }
 
+var right_trigger_actuated: bool = false
+var left_trigger_actuated: bool = false
+
 
 @onready var sprite: Sprite2D = $"Player Skin"
 @onready var anim = $AnimationPlayer
@@ -48,7 +51,7 @@ var axis_bindings = {
 var held_ball = null
 
 @onready var repossessArea = $Repossess
-var trying_repossession: bool= false
+var trying_repossession: bool = false
 
 #state machine 
 enum States {IDLE, RUNNING, JUMPING, HOLDING, THROWING}
@@ -68,7 +71,9 @@ func _ready() -> void:
 	shockwave_animation.animation_finished.connect(func(anim_name): 
 		shockwave_frames.hide())
 
+
 func _input(event: InputEvent):
+	
 	if event is InputEventMouseButton or event is InputEventMouseMotion:
 		#print("Using Mouse")
 		_is_roller = false
@@ -109,12 +114,17 @@ func _input(event: InputEvent):
 		if event is InputEventJoypadMotion:
 #			these comments are mainly here to find code quicker with ctrl + F
 #			jumping
-			if event.axis in axis_bindings["jump"]:
+			if event.axis in axis_bindings["jump"] and event.axis_value > DEADZONE \
+			and !left_trigger_actuated:
+				left_trigger_actuated = true
 				jump()
+			elif event.axis in axis_bindings["jump"] and event.axis_value < DEADZONE:
+				left_trigger_actuated = false
 				
 #			trigger motions shooting	
 			if event.axis in axis_bindings["interact"] \
-			and event.axis_value < DEADZONE:
+			and event.axis_value > DEADZONE and !right_trigger_actuated:
+				right_trigger_actuated = true
 				if held_ball != null:
 					shoot_ball()
 				else:
@@ -126,6 +136,9 @@ func _input(event: InputEvent):
 				
 				#interaction vibration
 				Input.start_joy_vibration(device_num, 0.5, 0.5, SHOOTING_RUMBLE_DURATION)
+			elif event.axis in axis_bindings["interact"] and event.axis_value < DEADZONE:
+				right_trigger_actuated = false
+
 
 	else:
 		if not event is InputEventKey: return
