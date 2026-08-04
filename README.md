@@ -3,8 +3,14 @@
 
 A football game built in Godot. The inspiration behind this game is 2d football games, along with super smash bro esque fighting games. 
 
+#### August 2026
+<img width="800" height="539" alt="demo" src="https://github.com/user-attachments/assets/9c4aa298-3046-42dd-a437-888b66108d5e" />
 
+
+#### May 2026
 <img width="800" height="539" alt="demo" src="https://github.com/user-attachments/assets/7496060c-5efc-4b09-9f12-419cde46646c" />
+
+
 
 # Task List
 
