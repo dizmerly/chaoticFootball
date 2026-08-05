@@ -18,9 +18,9 @@
 [ ] Online Multiplayer
 
 ### UI
-[ ] Scoreboard
+[X] Scoreboard
 
-[ ] Local multiplayer controller popup for player to join
+[X] Local multiplayer controller popup for player to join
 
 [ ] Working Main Menu
 
@@ -29,6 +29,8 @@
 [ ] Map selection
 
 [ ] Settings menu with saved settings file
+
+[ ] Goal banner accross after a goal.
 
 ### Miscellaneous 
 [ ] More character designs

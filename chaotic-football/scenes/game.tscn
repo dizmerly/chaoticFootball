@@ -2203,6 +2203,11 @@ script = ExtResource("1_kvpfn")
 environment = SubResource("Environment_1kice")
 
 [node name="Camera2D" type="Camera2D" parent="Map" unique_id=40182301]
+limit_left = -1307
+limit_top = -1162
+limit_right = 1334
+limit_bottom = 393
+limit_smoothed = true
 position_smoothing_speed = 1.0
 script = ExtResource("2_u5sy4")
 

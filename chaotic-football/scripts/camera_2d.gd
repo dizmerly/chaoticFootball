@@ -9,9 +9,10 @@ extends Camera2D
 var players = []
 @onready var ball = $"../Ball"
 
-const MIN_ZOOM = 1.3
+
+const MIN_ZOOM = 1.5
 const MAX_ZOOM = 3.0
-const ZOOM_DISTANCE = 400.0
+const ZOOM_DISTANCE = 550.0
 const MARGIN = 2
 const BALL_WEIGHT = 2
 const LERP_WEIGHT = 5
@@ -51,14 +52,9 @@ func _physics_process(delta: float) -> void:
 	centroid = centroid / weights
 	global_position = global_position.lerp(centroid, LERP_WEIGHT * delta)
 	
-
-#	Deprecated code, no longer need midpoints here, 
-#	using centroids now
-#	
-	#var midpoint
+	# Keep the camera's center from falling below its built-in bottom limit
+	#global_position.y = min(global_position.y, limit_bottom)
+	#global_position.y = max(global_position.y, limit_top)
+	#global_position.x = min(global_position.x, limit_right)
+	#global_position.x = max(global_position.x, limit_left)
 	#
-	#if furthestPlayer != null:
-		#midpoint = (furthestPlayer.global_position + ball.global_position) / 2.0
-	#else:
-		#midpoint = (ball.global_position) 
-		#
