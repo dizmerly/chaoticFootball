@@ -16,6 +16,9 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("open_settings"):
 		if popup_panel.visible:
 			popup_panel.hide()
+		elif settings_menu.visible:
+			settings_menu.hide()
+			popup_panel.show()
 		else:
 			popup_panel.show()
 			
@@ -40,3 +43,5 @@ func _on_quit_to_menu_pressed() -> void:
 
 func _on_quit_to_desktop_pressed() -> void:
 	get_tree().quit()
+	
+	
