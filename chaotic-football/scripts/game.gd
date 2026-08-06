@@ -6,6 +6,9 @@ extends Node
 var num_players = Input.get_connected_joypads().size()
 var players: Array = []
 var input_maps: Array = []
+var player_ids: Array = []
+
+var GOAL_RUMBLE_DURATION = 1 #seconds
 
 # Array for processing connected controllers
 var pending_devices: Array = []
@@ -114,12 +117,21 @@ func remove_player(player_index):
 func _on_goalpost_scored(team: int) -> void:
 	scoreboard.addPoint(team)
 	ball.reset.call_deferred()
-	players[0].global_position = spawn_point_1.global_position
+	#rumble every controller connected upon goal scored
+	for id in player_ids:
+		Input.start_joy_vibration(id, 0.7, 0.7, GOAL_RUMBLE_DURATION)
+	if players.size() > 0:
+		players[0].global_position = spawn_point_1.global_position
+	if players.size() > 1:
+		players[1].global_position = spawn_point_2.global_position
+
 	
 
 func _on_goalpost_2_scored(team: int) -> void:
 	scoreboard.addPoint(team)
 	ball.reset.call_deferred()
+	for id in player_ids:
+		Input.start_joy_vibration(id, 0.7, 0.7, GOAL_RUMBLE_DURATION)
 #	super temporary stupid approach, but just works for now
 	if players.size() > 0:
 		players[0].global_position = spawn_point_1.global_position
@@ -131,6 +143,7 @@ func _on_goalpost_2_scored(team: int) -> void:
 func _on_controller_confirmation_pressed_a(controller_id: int) -> void:
 	if controller_id in pending_devices:
 		add_player(controller_id)
+		player_ids.push_back(controller_id)
 		pending_devices.erase(controller_id)
 	if pending_devices.is_empty():
 		join_popup.hide()

@@ -143,29 +143,23 @@ position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_dqkch")
 
 [node name="Player" type="Node2D" parent="." unique_id=718855102]
-visible = false
 
 [node name="BallPickup" type="Area2D" parent="." unique_id=1646018701]
-visible = false
 collision_layer = 4
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BallPickup" unique_id=1204596718]
-visible = false
 rotation = 1.5661491
 shape = SubResource("CapsuleShape2D_g2els")
 
 [node name="ClosestGround" type="RayCast2D" parent="." unique_id=1321707472]
-visible = false
 target_position = Vector2(0, 1000)
 collision_mask = 2
 
 [node name="BallRayCast" type="RayCast2D" parent="." unique_id=1321707473]
-visible = false
 collision_mask = 3
 
 [node name="Repossess" type="Area2D" parent="." unique_id=2021466634]
-visible = false
 collision_layer = 0
 collision_mask = 16
 
@@ -174,14 +168,12 @@ root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_tuyoq")
 
 [node name="ShockwaveFrames" type="Sprite2D" parent="Repossess" unique_id=1770387759]
-visible = false
 z_index = -1
 texture = ExtResource("2_g2els")
 hframes = 4
 vframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Repossess" unique_id=318303085]
-visible = false
 shape = SubResource("CircleShape2D_3vyb7")
 
 [connection signal="body_entered" from="BallPickup" to="." method="_on_ball_pickup_body_entered"]

@@ -68,6 +68,7 @@ func _ready() -> void:
 	add_to_group("player")
 	pickupArea.body_entered.connect(_on_ball_pickup_body_entered)
 	#repossessArea.body_entered.connect(_on_reposess_body_entered)
+	shockwave_frames.hide()
 	shockwave_animation.animation_finished.connect(func(anim_name): 
 		shockwave_frames.hide())
 
