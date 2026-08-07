@@ -28,8 +28,10 @@ var abilities = {"BONFIRE" : "res://scenes/bonfire.tscn"}
 #REFERENCES TO OBJECTS IN GAME
 @onready var ball: RigidBody2D = $Map/Ball
 @onready var spawn_point_1: Marker2D = $"Spawn Point 1"
-
 @onready var spawn_point_2: Marker2D = $"Spawn Point 2"
+
+#REFERENCE TO WorldEnvironment
+@onready var world_environment: WorldEnvironment = $Map/WorldEnvironment
 
 
 
@@ -39,18 +41,10 @@ func _ready() -> void:
 	# Get a list of all controllers currently plugged in right now
 	var connected_rollers = Input.get_connected_joypads()
 	
-	#if connected_rollers.size() == 0:
-		## Keep your debug keyboard code
-		#add_player(-1)
-	#else:
-		## Loop through the already connected controllers!
-		#for roller_id in connected_rollers:
-			#pending_devices.append(roller_id)
-			#
-		## Since there are people waiting, show the popup right away!
-		#join_popup.show()
-
-
+	
+	#connect settings
+	SettingsManager.brightness_changed.connect(_on_brightness_changed)
+	_on_brightness_changed(SettingsManager.brightness)
 
 # PLAYER CONNECTION CONTROL 
 
@@ -147,3 +141,7 @@ func _on_controller_confirmation_pressed_a(controller_id: int) -> void:
 		pending_devices.erase(controller_id)
 	if pending_devices.is_empty():
 		join_popup.hide()
+
+func _on_brightness_changed(value: float) -> void:
+	# Slider 0–100 becomes a sensible game brightness range.
+	world_environment.environment.adjustment_brightness = value

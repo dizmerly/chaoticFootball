@@ -8,6 +8,10 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	for child in $Panel/VBoxContainer.get_children():
+		if child is Button:
+			child.mouse_entered.connect(child.grab_focus)
+
 	settings_menu.hide()
 	popup_panel.hide()
 	

@@ -4,11 +4,15 @@ const SETTINGS_PATH := "user://settings.cfg"
 const SETTINGS_SECTION := "display_and_audio"
 const MIN_VOLUME := 0
 const MAX_VOLUME := 100
+const MIN_BRIGHTNESS = 0.8
+const MAX_BRIGHTNESS = 1.2
+
 
 # These values match the 0-100 range used by the sliders.
 var master_volume := 50
 var sfx_volume := 50
-var brightness := 50
+var brightness := 1.0
+signal brightness_changed(value: float)
 
 # 0 = fullscreen, 1 = borderless, 2 = windowed. 
 # (for option button in settings panel)
@@ -39,7 +43,7 @@ func load_settings() -> void:
 
 	master_volume = clampi(int(config.get_value(SETTINGS_SECTION, "master_volume", master_volume)), MIN_VOLUME, MAX_VOLUME)
 	sfx_volume = clampi(int(config.get_value(SETTINGS_SECTION, "sfx_volume", sfx_volume)), MIN_VOLUME, MAX_VOLUME)
-	brightness = clampi(int(config.get_value(SETTINGS_SECTION, "brightness", brightness)), MIN_VOLUME, MAX_VOLUME)
+	brightness = float(config.get_value(SETTINGS_SECTION, "brightness", brightness))
 	window_mode = clampi(int(config.get_value(SETTINGS_SECTION, "window_mode", window_mode)), 0, 2)
 	apply_settings()
 
@@ -54,9 +58,11 @@ func set_sfx_volume(value: float) -> void:
 	save_settings()
 
 func set_brightness(value: float) -> void:
-	brightness = clampi(roundi(value), MIN_VOLUME, MAX_VOLUME)
+#	for the sake of simplicity since min and max volume is just 0, 100
+#	I can just use those variables here.
+	brightness = value
 	# Brightness is persisted now. Apply it from the eventual display shader or
-	# CanvasModulate node, since Godot does not provide a global 2D brightness setting.
+	brightness_changed.emit(brightness)
 	save_settings()
 
 func set_window_mode(value: int) -> void:
