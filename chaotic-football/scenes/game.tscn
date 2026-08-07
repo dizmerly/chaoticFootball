@@ -34,7 +34,6 @@ glow_enabled = true
 glow_intensity = 4.0
 glow_strength = 1.16
 adjustment_enabled = true
-adjustment_brightness = 1.2
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yqjtg"]
 
