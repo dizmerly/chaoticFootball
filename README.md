@@ -4,7 +4,7 @@
 This project is source-available under the Chaotic Football Non-Commercial Modding License.
 
 You may play with, mod, fork, and share it for free. You must credit the original project, 
-keep derivatives non-commercial, and cannot use the game's name or branding for your own release.
+keep derivatives non-commercial, and you cannot use the game's name or branding for your own release.
 
 A football game built in Godot. The inspiration behind this game is 2d football games, along with super smash bro esque fighting games. 
 
