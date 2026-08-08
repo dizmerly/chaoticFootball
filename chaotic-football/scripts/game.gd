@@ -27,8 +27,8 @@ var abilities = {"BONFIRE" : "res://scenes/bonfire.tscn"}
 
 #REFERENCES TO OBJECTS IN GAME
 @onready var ball: RigidBody2D = $Map/Ball
-@onready var spawn_point_1: Marker2D = $"Spawn Point 1"
-@onready var spawn_point_2: Marker2D = $"Spawn Point 2"
+@onready var spawn_point_1: Marker2D = $"Map/Spawn Point 1"
+@onready var spawn_point_2: Marker2D = $"Map/Spawn Point 2"
 
 #REFERENCE TO WorldEnvironment
 @onready var world_environment: WorldEnvironment = $Map/WorldEnvironment

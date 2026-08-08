@@ -2201,6 +2201,12 @@ script = ExtResource("1_kvpfn")
 
 [node name="Map" type="Node" parent="." unique_id=901398674]
 
+[node name="Spawn Point 1" parent="Map" unique_id=316761136 instance=ExtResource("26_bhx41")]
+position = Vector2(-272, -126)
+
+[node name="Spawn Point 2" parent="Map" unique_id=1012790983 instance=ExtResource("26_bhx41")]
+position = Vector2(254, -138)
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Map" unique_id=688460596]
 environment = SubResource("Environment_1kice")
 
@@ -2297,12 +2303,6 @@ offset_left = 960.0
 offset_top = 547.76
 offset_right = 1000.0
 offset_bottom = 547.76
-
-[node name="Spawn Point 1" parent="." unique_id=316761136 instance=ExtResource("26_bhx41")]
-position = Vector2(-272, -126)
-
-[node name="Spawn Point 2" parent="." unique_id=1012790983 instance=ExtResource("26_bhx41")]
-position = Vector2(254, -138)
 
 [connection signal="scored" from="Map/goalpost" to="." method="_on_goalpost_scored"]
 [connection signal="scored" from="Map/goalpost2" to="." method="_on_goalpost_2_scored"]

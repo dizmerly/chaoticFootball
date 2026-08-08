@@ -54,4 +54,6 @@ func use():
 	if active: 
 		active = false
 		visible = false
+		if player.held_ball != null:
+			player.drop_ball()
 		player.global_position = global_position

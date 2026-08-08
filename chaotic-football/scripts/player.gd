@@ -14,6 +14,8 @@ const BALL_PICKUP_DELAY = 0.1
 const BALL_REPOSSESSION_DELAY = 0.1
 const DEADZONE = 0.5
 const REPOSSESSION_MULTIPLIER = 0.69
+const DROP_MULTIPLIER = 0.8
+
 
 const SHOOTING_RUMBLE_DURATION = 0.2
 
@@ -354,3 +356,18 @@ func _on_ball_pickup_body_entered(body: Node2D) -> void:
 		held_ball.set_collision_mask_value(1, false)
 		
 		update_ball_pos(BALLDIST)
+		
+func drop_ball() -> void: 
+	
+	if held_ball == null:
+		return
+	var dropped_ball = held_ball
+	held_ball = null
+
+	dropped_ball.held_by = null
+	dropped_ball.freeze = false
+	dropped_ball.linear_velocity = Vector2(velocity.x * DROP_MULTIPLIER,\
+	 velocity.y * DROP_MULTIPLIER)
+	dropped_ball.angular_velocity = 0
+	dropped_ball.set_collision_layer_value(3, true)
+	dropped_ball.set_collision_mask_value(1, true)

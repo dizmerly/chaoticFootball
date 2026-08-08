@@ -27,3 +27,6 @@ func _on_brightness_slider_value_changed(value: float) -> void:
 
 func _on_option_button_item_selected(index: int) -> void:
 	SettingsManager.set_window_mode(index)
+	
+func _on_back_button_pressed() -> void:
+	hide()

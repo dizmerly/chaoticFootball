@@ -106,7 +106,18 @@ layout_mode = 2
 text = "Brightness"
 label_settings = SubResource("LabelSettings_5p8wc")
 
+[node name="back_button" type="Button" parent="." unique_id=1743143068]
+layout_mode = 0
+offset_left = 1600.0
+offset_top = 896.0
+offset_right = 1856.0
+offset_bottom = 1024.0
+theme_override_fonts/font = ExtResource("1_5p8wc")
+theme_override_font_sizes/font_size = 48
+text = "Back"
+
 [connection signal="value_changed" from="VBoxContainer/volume_label/volume_slider" to="." method="_on_volume_slider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/sfx_volume/sfx_slider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/brightness_label/brightness_slider" to="." method="_on_brightness_slider_value_changed"]
 [connection signal="item_selected" from="VBoxContainer/window_mode_label/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="pressed" from="back_button" to="." method="_on_back_button_pressed"]

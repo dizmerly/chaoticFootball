@@ -22,13 +22,13 @@
 
 [X] Local multiplayer controller popup for player to join
 
-[ ] Working Main Menu
+[X] Working Main Menu
 
 [ ] Character selection
 
 [ ] Map selection
 
-[ ] Settings menu with saved settings file
+[X] Settings menu with saved settings file
 
 [ ] Goal banner accross after a goal.
 
@@ -57,6 +57,7 @@ you can throw the ball through the collision shape
 FIXED - the problem was that the physics tick speed was too slow 
 (changed to 120) and the physics collision solver is continuous now which better
 calculates physics collisions. 
+
 
 
 TODO: 
@@ -97,3 +98,6 @@ a goal is scored. Began working on controller confirmation for joining the game.
 #### 7/28/26
 Pressing A to join implemented, fixed controllers not being recognized when loading from menu.
 Added ball resetting mechanic whenever a goal is scored.
+
+#### 8/7/26
+Added a settings menu and popup menu. Menus save user configs. 
