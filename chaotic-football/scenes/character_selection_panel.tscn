@@ -2,8 +2,6 @@
 
 [ext_resource type="FontFile" uid="uid://cy5p8l8p0aaj4" path="res://assets/fonts/Minecraft.ttf" id="1_3t7nf"]
 [ext_resource type="Script" uid="uid://bnfdvng4yflm" path="res://scripts/character_selection_panel.gd" id="1_ghwnj"]
-[ext_resource type="Texture2D" uid="uid://c8mdc2ormuvcf" path="res://assets/SoccerGame/playerOne.png" id="3_oukwu"]
-[ext_resource type="Texture2D" uid="uid://b1tectstlkfq5" path="res://assets/SoccerGame/playerTwo.png" id="4_hdjqe"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bbtho"]
 font = ExtResource("1_3t7nf")
@@ -55,53 +53,3 @@ offset_bottom = 243.0
 text = "Blue Team"
 label_settings = SubResource("LabelSettings_bbtho")
 horizontal_alignment = 1
-
-[node name="Panel2" type="Panel" parent="." unique_id=2136242850]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 1152.0
-offset_top = -220.0
-offset_right = 1664.0
-offset_bottom = 228.0
-grow_vertical = 2
-
-[node name="p2" type="Sprite2D" parent="Panel2" unique_id=145275291]
-position = Vector2(256, 256)
-scale = Vector2(16, 16)
-texture = ExtResource("3_oukwu")
-hframes = 3
-vframes = 2
-
-[node name="p1" type="Sprite2D" parent="Panel2" unique_id=1046945943]
-position = Vector2(256, 256)
-scale = Vector2(16, 16)
-texture = ExtResource("4_hdjqe")
-hframes = 3
-vframes = 2
-
-[node name="Panel" type="Panel" parent="." unique_id=249863860]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 256.0
-offset_top = -220.0
-offset_right = 768.0
-offset_bottom = 228.0
-grow_vertical = 2
-
-[node name="p2" type="Sprite2D" parent="Panel" unique_id=125611457]
-position = Vector2(256, 256)
-scale = Vector2(16, 16)
-texture = ExtResource("3_oukwu")
-hframes = 3
-vframes = 2
-
-[node name="p1" type="Sprite2D" parent="Panel" unique_id=823911009]
-position = Vector2(256, 256)
-scale = Vector2(16, 16)
-texture = ExtResource("4_hdjqe")
-hframes = 3
-vframes = 2
