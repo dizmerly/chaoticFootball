@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8mdc2ormuvcf"
-path="res://.godot/imported/playerOne.png-0a93d0ec7c7e545d823eeb0be6b51447.ctex"
+uid="uid://nmxoyo7s02r0"
+path="res://.godot/imported/argentinaPortrait.png-a397a48d42805a66a77e3cb078cb69de.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/SoccerGame/playerOne.png"
-dest_files=["res://.godot/imported/playerOne.png-0a93d0ec7c7e545d823eeb0be6b51447.ctex"]
+source_file="res://assets/SoccerGame/portraits/argentinaPortrait.png"
+dest_files=["res://.godot/imported/argentinaPortrait.png-a397a48d42805a66a77e3cb078cb69de.ctex"]
 
 [params]
 

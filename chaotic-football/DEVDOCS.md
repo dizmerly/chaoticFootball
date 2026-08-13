@@ -101,3 +101,12 @@ Added ball resetting mechanic whenever a goal is scored.
 
 #### 8/7/26
 Added a settings menu and popup menu. Menus save user configs. 
+
+
+#### 8/12/26
+Working on character selection screen. The general idea for how its supposed to work
+is whenever the player selects the start game menu, they are loaded into the character selection
+screen, each controller can select their player skin, and that skin is passed into the player
+load skin function, in the game manager script. Later on, the character selection screen
+should be expanded into a horizontal grid system with probably up to 8 players total between
+red and blue teams. 

@@ -21,6 +21,8 @@ const SHOOTING_RUMBLE_DURATION = 0.2
 
 var device_num: int
 var player_id: int
+var player_skin: String
+
 
 var button_bindings = {
 	"interact": [JOY_BUTTON_X, KEY_F],
@@ -371,3 +373,10 @@ func drop_ball() -> void:
 	dropped_ball.angular_velocity = 0
 	dropped_ball.set_collision_layer_value(3, true)
 	dropped_ball.set_collision_mask_value(1, true)
+	
+func load_playerskin(playerskin_file: String) -> void:
+	player_skin = playerskin_file
+#	pseudocode
+#	assign player skin and load into the texture node
+	#sprite.texture_load
+	

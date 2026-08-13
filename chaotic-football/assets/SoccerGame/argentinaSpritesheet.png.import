@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1tectstlkfq5"
-path="res://.godot/imported/playerTwo.png-c6b9572b43dade3f4db7b8a37aee7ba6.ctex"
+uid="uid://c8mdc2ormuvcf"
+path="res://.godot/imported/argentinaSpritesheet.png-ce8005078fc8f18010d3a4300431b9ca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/SoccerGame/playerTwo.png"
-dest_files=["res://.godot/imported/playerTwo.png-c6b9572b43dade3f4db7b8a37aee7ba6.ctex"]
+source_file="res://assets/SoccerGame/argentinaSpritesheet.png"
+dest_files=["res://.godot/imported/argentinaSpritesheet.png-ce8005078fc8f18010d3a4300431b9ca.ctex"]
 
 [params]
 
