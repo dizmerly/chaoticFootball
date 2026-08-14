@@ -82,7 +82,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			if controller_id in GameManager.blue_team:
 				confirm_selection(controller_id, blue_index)
 				ready_blue.show()
-			elif controller_id == GameManager.red_team:
+			elif controller_id in GameManager.red_team:
 				confirm_selection(controller_id, red_index)
 				ready_red.show()
 #		Cycle left and right
