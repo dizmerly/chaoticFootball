@@ -7,14 +7,14 @@ extends Control
 @onready var red_image: TextureRect = $red_portrait/red_image
 
 #UI Buttons
-@onready var left_blue: Polygon2D = $left_blue
-@onready var right_blue: Polygon2D = $right_blue
-@onready var left_red: Polygon2D = $left_red
-@onready var right_red: Polygon2D = $right_red
+
+
 
 var blue_index: int
 var red_index: int
 
+
+signal character_selected(controller_id: int, spritesheet_path: String)
 
 
 const CHARACTERS = [
@@ -42,10 +42,34 @@ func _process(delta: float) -> void:
 	pass
 
 func load_image(image_index: int, team_color: String) -> void:
-	if team_color == "blue":
-		pass
-	elif team_color == "red":
-		pass
-	else:
-		print("Invalid team name") 
+	if image_index < 0 or image_index > CHARACTERS.size():
+		push_error("Invalid character index, %d" % image_index)
+		return
+	var character = CHARACTERS[image_index]
+	var portrait: Texture2D = character["portrait"]
 	
+	if team_color == "blue":
+		blue_image.texture = portrait
+	elif team_color == "red":
+		red_image.texture = portrait
+	else:
+		push_error("Invalid team color %s" % team_color)
+
+func confirm_selection(controller_id: int, image_index: int) -> void:
+	if image_index < 0 or image_index >= CHARACTERS.size():
+		push_error("Invalid character index: %d" % image_index)
+		return
+
+	character_selected.emit(
+		controller_id,
+		CHARACTERS[image_index]["spritesheet"]
+	)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventJoypadButton:
+		if event.button_index == JOY_BUTTON_A and event.pressed:
+			var controller_id := event.device
+			if controller_id == 0:
+				confirm_selection(controller_id, blue_index)
+			elif controller_id == 1:
+				confirm_selection(controller_id, red_index)
