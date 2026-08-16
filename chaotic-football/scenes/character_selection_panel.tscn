@@ -24,9 +24,12 @@ grow_vertical = 2
 script = ExtResource("1_ghwnj")
 
 [node name="ButtonGroup" type="Control" parent="." unique_id=2131433626]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="left_red" type="TextureButton" parent="ButtonGroup" unique_id=1082041059]
 layout_mode = 0
@@ -79,14 +82,15 @@ layout_mode = 0
 offset_left = 960.0
 offset_right = 1920.0
 offset_bottom = 1080.0
+mouse_filter = 2
 color = Color(0.7609993, 0.25068137, 0.27001974, 1)
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1532310075]
 z_index = -3
 layout_mode = 0
-offset_left = 64.0
 offset_right = 960.0
 offset_bottom = 1080.0
+mouse_filter = 2
 color = Color(0.3374371, 0.47908807, 0.5388152, 1)
 
 [node name="red_team_label" type="Label" parent="." unique_id=1262510596]
@@ -123,6 +127,7 @@ offset_top = -284.0
 offset_right = 255.35999
 offset_bottom = 164.0
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="blue_image" type="TextureRect" parent="blue_portrait" unique_id=322010295]
 custom_minimum_size = Vector2(256, 256)
@@ -141,6 +146,7 @@ offset_left = -255.3601
 offset_top = -284.0
 offset_right = 256.6399
 offset_bottom = 164.0
+mouse_filter = 2
 
 [node name="red_image" type="TextureRect" parent="red_portrait" unique_id=93156974]
 custom_minimum_size = Vector2(256, 256)
@@ -184,3 +190,8 @@ layout_mode = 0
 offset_right = 512.0
 offset_bottom = 128.0
 color = Color(0.24705882, 0.9137255, 0.23921569, 1)
+
+[connection signal="pressed" from="ButtonGroup/left_red" to="." method="_on_left_red_pressed"]
+[connection signal="pressed" from="ButtonGroup/right_red" to="." method="_on_right_red_pressed"]
+[connection signal="pressed" from="ButtonGroup/right_blue" to="." method="_on_right_blue_pressed"]
+[connection signal="pressed" from="ButtonGroup/left_blue" to="." method="_on_left_blue_pressed"]

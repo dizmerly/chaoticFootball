@@ -104,21 +104,37 @@ func _unhandled_input(event: InputEvent) -> void:
 				ready_red.hide()
 
 func cycle_blue_left() -> void: 
-	if ready_blue.hidden:
+	if not ready_blue.visible:
 		blue_index = wrapi(blue_index - 1, 0, CHARACTERS.size())
 		load_image(blue_index, "blue")
 				
 func cycle_blue_right() -> void: 
-	if ready_blue.hidden:
+	if not ready_blue.visible:
 		blue_index = wrapi(blue_index + 1, 0, CHARACTERS.size())
 		load_image(blue_index, "blue")
 
 func cycle_red_left() -> void:
-	if ready_red.hidden: 
+	if not ready_red.visible: 
 		red_index = wrapi(red_index - 1, 0, CHARACTERS.size())
 		load_image(red_index, "red")
 
 func cycle_red_right() -> void: 
-	if ready_red.hidden:	
+	if not ready_red.visible:	
 		red_index = wrapi(red_index + 1, 0, CHARACTERS.size())
 		load_image(red_index, "red")
+
+
+func _on_left_red_pressed() -> void:
+	cycle_red_left()
+
+
+func _on_right_red_pressed() -> void:
+	cycle_red_right()
+
+
+func _on_right_blue_pressed() -> void:
+	cycle_blue_right()
+
+
+func _on_left_blue_pressed() -> void:
+	cycle_blue_left()
