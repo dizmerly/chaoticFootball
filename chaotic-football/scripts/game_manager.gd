@@ -1,14 +1,34 @@
 extends Node
 
-# assign controller id's to teams (temp solution hardcoded for now)
-var blue_team := [0]
-var red_team := [1]
+# Controller state that must survive scene changes.
+var connected_controllers: Array[int] = []
+var pending_devices: Array[int] = []
 
-# Called when the node enters the scene tree for the first time.
+# Temporary team assignments for character-select testing.
+var blue_team: Array[int] = [0]
+var red_team: Array[int] = [1]
+
+signal controller_join_requested(device: int)
+signal controller_disconnected(device: int)
+
 func _ready() -> void:
-	pass # Replace with function body.
+	for device in Input.get_connected_joypads():
+		connected_controllers.append(device)
+		pending_devices.append(device)
+	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 
+func _on_joy_connection_changed(device: int, connected: bool) -> void:
+	if connected:
+		if device in connected_controllers:
+			return
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+		connected_controllers.append(device)
+		pending_devices.append(device)
+		controller_join_requested.emit(device)
+		return
+
+	connected_controllers.erase(device)
+	pending_devices.erase(device)
+	blue_team.erase(device)
+	red_team.erase(device)
+	controller_disconnected.emit(device)

@@ -16,7 +16,6 @@ const DEADZONE = 0.5
 const REPOSSESSION_MULTIPLIER = 0.69
 const DROP_MULTIPLIER = 0.8
 
-
 const SHOOTING_RUMBLE_DURATION = 0.2
 
 var device_num: int

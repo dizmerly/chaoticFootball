@@ -2,16 +2,12 @@
 
 extends Node
 
-# Input pulls how many total controllers connected
-var num_players = Input.get_connected_joypads().size()
 var players: Array = []
 var input_maps: Array = []
 var player_ids: Array = []
 
 var GOAL_RUMBLE_DURATION = 1 #seconds
 
-# Array for processing connected controllers
-var pending_devices: Array = []
 @onready var join_popup: Panel = $Map/CanvasLayer/JoinPopup
 
 
@@ -36,37 +32,21 @@ var abilities = {"BONFIRE" : "res://scenes/bonfire.tscn"}
 
 
 func _ready() -> void:
-	Input.joy_connection_changed.connect(roller_connection_changed)
-	
-	# Get a list of all controllers currently plugged in right now
-	var connected_rollers = Input.get_connected_joypads()
+	GameManager.controller_join_requested.connect(_on_controller_join_requested)
+	if not GameManager.pending_devices.is_empty():
+		join_popup.show()
 	
 	
 	#connect settings
 	SettingsManager.brightness_changed.connect(_on_brightness_changed)
 	_on_brightness_changed(SettingsManager.brightness)
 
-# PLAYER CONNECTION CONTROL 
+# PLAYER CONNECTION CONTROL
 
-# adds players to an array that tracks which devices havent yet been connected
-func roller_connection_changed(device: int, connected: bool):
-	if connected:
-		num_players = Input.get_connected_joypads().size()
-#		DEBUG
-		#print("Connected device {d}".format({"d":device}))
-		
-		# make a popup in the ui for the player to press a to confirm
-		
-		
-		pending_devices.append(device)
-		
-		join_popup.show()
-		
-#		temporary fix to remove keyboard player. 
-		remove_player(-1)
-	else:
-		pass
-		# TODO: remove player function here in the future
+func _on_controller_join_requested(_device: int) -> void:
+	join_popup.show()
+	# Temporary fix to remove the keyboard player when a controller joins.
+	remove_player(-1)
 
 func add_player(player_index, ability_selection = "bonfire"):
 	#TODO
@@ -135,11 +115,11 @@ func _on_goalpost_2_scored(team: int) -> void:
 
 
 func _on_controller_confirmation_pressed_a(controller_id: int) -> void:
-	if controller_id in pending_devices:
+	if controller_id in GameManager.pending_devices:
 		add_player(controller_id)
 		player_ids.push_back(controller_id)
-		pending_devices.erase(controller_id)
-	if pending_devices.is_empty():
+		GameManager.pending_devices.erase(controller_id)
+	if GameManager.pending_devices.is_empty():
 		join_popup.hide()
 
 func _on_brightness_changed(value: float) -> void:
