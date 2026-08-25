@@ -40,9 +40,11 @@ func _ready() -> void:
 	red_index = 0
 	ready_red.hide()
 	ready_blue.hide()
-	
+
 	load_image(red_index, "red")
 	load_image(blue_index, "blue")
+
+	character_selected.connect(GameManager._on_character_selected)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -99,8 +101,10 @@ func _unhandled_input(event: InputEvent) -> void:
 #		Cancel Ready
 		if event.button_index == JOY_BUTTON_B and event.is_pressed():
 			if controller_id in GameManager.blue_team:
+				GameManager.unselect_character(controller_id)
 				ready_blue.hide()
 			if controller_id in GameManager.red_team:
+				GameManager.unselect_character(controller_id)
 				ready_red.hide()
 
 func cycle_blue_left() -> void: 

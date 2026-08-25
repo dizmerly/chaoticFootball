@@ -37,6 +37,8 @@ func _move_menu_focus(direction: int) -> void:
 func _on_settings_pressed() -> void:
 	settings_menu.show()
 
+func _on_start_game_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/character_selection_panel.tscn")
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
