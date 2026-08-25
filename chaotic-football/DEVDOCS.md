@@ -86,6 +86,8 @@ emit a force field to throw the ball out of the other players possession
 If the ball is in the players possession, then the player upon action 
 button just shoots the ball. 
 
+Bug:
+campfire sometimes gets you stuck into the floor. 
 
 
 
