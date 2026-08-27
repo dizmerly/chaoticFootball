@@ -89,4 +89,6 @@ func load_game() -> void:
 		return
 
 	is_loading_game = true
+#	Arbitrary 1 second wait for here temporarily TODO change this later
+	await get_tree().create_timer(1.0).timeout
 	get_tree().change_scene_to_file("res://scenes/game.tscn")

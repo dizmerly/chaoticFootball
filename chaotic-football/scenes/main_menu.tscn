@@ -106,3 +106,4 @@ visible = false
 [connection signal="pressed" from="Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="VBoxContainer/Local Multiplayer" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/Online Multiplayer" to="." method="_on_online_multiplayer_pressed"]

@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-
+# Player Settings
 const SPEED = 470.0
 const MAX_SPEED = 600.0
 const ACCELERATION = 1200
@@ -18,11 +18,13 @@ const DROP_MULTIPLIER = 0.8
 
 const SHOOTING_RUMBLE_DURATION = 0.2
 
+# Player Identification 
 var device_num: int
 var player_id: int
-var player_skin: String
 
 
+
+# Control Bindings
 var button_bindings = {
 	"interact": [JOY_BUTTON_X, KEY_F],
 	"jump": [JOY_BUTTON_A, KEY_SPACE],
@@ -41,9 +43,11 @@ var axis_bindings = {
 var right_trigger_actuated: bool = false
 var left_trigger_actuated: bool = false
 
-
+# Textures
 @onready var sprite: Sprite2D = $"Player Skin"
 @onready var anim = $AnimationPlayer
+var skin_path: String
+
 
 @onready var shockwave_frames: Sprite2D = $Repossess/ShockwaveFrames
 @onready var shockwave_animation: AnimationPlayer = $Repossess/ShockwaveAnimation
@@ -70,7 +74,6 @@ var abilities: Array = []
 func _ready() -> void:
 	add_to_group("player")
 	pickupArea.body_entered.connect(_on_ball_pickup_body_entered)
-	#repossessArea.body_entered.connect(_on_reposess_body_entered)
 	shockwave_frames.hide()
 	shockwave_animation.animation_finished.connect(func(anim_name): 
 		shockwave_frames.hide())
@@ -308,8 +311,6 @@ func _physics_process(delta: float) -> void:
 				
 
 	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	#
 	#if direction != 0 and not is_on_floor():
 		#velocity.x 	= move_toward(velocity.x, direction * MAX_SPEED, ACCELERATION * 2  * delta)
 	#elif direction != 0:
@@ -373,9 +374,11 @@ func drop_ball() -> void:
 	dropped_ball.set_collision_layer_value(3, true)
 	dropped_ball.set_collision_mask_value(1, true)
 	
-func load_playerskin(playerskin_file: String) -> void:
-	player_skin = playerskin_file
+func load_playerskin(spritesheet_path: String) -> void:
 #	pseudocode
 #	assign player skin and load into the texture node
-	#sprite.texture_load
+	skin_path = spritesheet_path
+	sprite.texture = load(skin_path) as Texture2D
+	#sprite.region_enabled = true
+	sprite.region_rect = Rect2(0, 0, 16, 16) # size of one drawn frame
 	

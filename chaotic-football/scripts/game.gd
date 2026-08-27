@@ -49,14 +49,13 @@ func _on_controller_join_requested(_device: int) -> void:
 	remove_player(-1)
 
 func add_player(player_index, ability_selection = "bonfire"):
-	#TODO
-	#add code here that controls what abilities the players have access to. 
+	# Applying player attributes
 	var player = load("res://scenes/player.tscn").instantiate()
 	player.device_num = player_index
 	player.player_id = player_index
-	
+
+
 	# Adding player abilities
-	
 	var player_abilities: Array = []
 	if abilities.has(ability_selection.to_upper()):
 		var ability = load(abilities[ability_selection.to_upper()]).instantiate()
@@ -68,9 +67,12 @@ func add_player(player_index, ability_selection = "bonfire"):
 		
 	player.abilities = player_abilities
 	
+	# add player to tree and append them to the 
+	# player array connected to camera
 	add_child(player)
 	players.append(player)
 	camera.players.append(player) # add player to list collection in camera
+	player.load_playerskin(GameManager.selected_characters[player_index])
 	
 	
 	print(players)
