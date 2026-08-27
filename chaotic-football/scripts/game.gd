@@ -70,6 +70,11 @@ func add_player(player_index, ability_selection = "bonfire"):
 	# add player to tree and append them to the 
 	# player array connected to camera
 	add_child(player)
+	if player_index in GameManager.blue_team:
+		player.global_position = spawn_point_1.global_position
+	elif player_index in GameManager.red_team:
+		player.global_position = spawn_point_2.global_position
+
 	players.append(player)
 	camera.players.append(player) # add player to list collection in camera
 	player.load_playerskin(GameManager.selected_characters[player_index])
@@ -91,6 +96,17 @@ func remove_player(player_index):
 # HUD CONTROL	
 func score_goal(team:int):
 	scoreboard.addPoint(team)
+	await get_tree().create_timer(3) #seconds
+#	check if any teams have reached the point threshold to win
+	var result: String = scoreboard.winning_team()
+	if result != "none":
+		if result == "blue":
+			print("Blue won!")
+		elif result == "red":
+			print("Red won!")
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+		
+		
 	ball.reset.call_deferred()
 	#rumble every controller connected upon goal scored
 	for id in player_ids:
@@ -99,7 +115,6 @@ func score_goal(team:int):
 		players[0].global_position = spawn_point_1.global_position
 	if players.size() > 1:
 		players[1].global_position = spawn_point_2.global_position
-	
 
 func _on_goalpost_scored(team: int) -> void:
 	score_goal(team)

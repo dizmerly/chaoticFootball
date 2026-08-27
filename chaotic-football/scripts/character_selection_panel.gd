@@ -76,6 +76,10 @@ func confirm_selection(controller_id: int, image_index: int) -> void:
 	)
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("debugMode"):
+		debug_start_game()
+		return
+
 	if event is InputEventJoypadButton:
 		var controller_id = event.device
 		
@@ -106,6 +110,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			if controller_id in GameManager.red_team:
 				GameManager.unselect_character(controller_id)
 				ready_red.hide()
+
+#DEBUG FUNCTION
+func debug_start_game() -> void:
+	GameManager.load_game()
 
 func cycle_blue_left() -> void: 
 	if not ready_blue.visible:

@@ -34,3 +34,11 @@ func addPoint(team: int) -> void:
 func resetPoints() -> void:
 	teamAScore = 0
 	teamBScore = 0
+	
+func winning_team() -> String: 
+	if teamAScore >= WINNING_SCORE:
+		return "blue"
+	elif teamBScore >= WINNING_SCORE:
+		return "red"
+	else:
+		return "none"
