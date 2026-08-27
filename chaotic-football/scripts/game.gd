@@ -89,8 +89,7 @@ func remove_player(player_index):
 	
 	
 # HUD CONTROL	
-	
-func _on_goalpost_scored(team: int) -> void:
+func score_goal(team:int):
 	scoreboard.addPoint(team)
 	ball.reset.call_deferred()
 	#rumble every controller connected upon goal scored
@@ -100,21 +99,13 @@ func _on_goalpost_scored(team: int) -> void:
 		players[0].global_position = spawn_point_1.global_position
 	if players.size() > 1:
 		players[1].global_position = spawn_point_2.global_position
-
 	
 
+func _on_goalpost_scored(team: int) -> void:
+	score_goal(team)
+
 func _on_goalpost_2_scored(team: int) -> void:
-	scoreboard.addPoint(team)
-	ball.reset.call_deferred()
-	for id in player_ids:
-		Input.start_joy_vibration(id, 0.7, 0.7, GOAL_RUMBLE_DURATION)
-#	super temporary stupid approach, but just works for now
-	if players.size() > 0:
-		players[0].global_position = spawn_point_1.global_position
-	if players.size() > 1:
-		players[1].global_position = spawn_point_2.global_position
-
-
+	score_goal(team)
 
 func _on_controller_confirmation_pressed_a(controller_id: int) -> void:
 	if controller_id in GameManager.pending_devices:
@@ -127,3 +118,6 @@ func _on_controller_confirmation_pressed_a(controller_id: int) -> void:
 func _on_brightness_changed(value: float) -> void:
 	# Slider 0–100 becomes a sensible game brightness range.
 	world_environment.environment.adjustment_brightness = value
+	
+func game_end():
+	print("Game over")
