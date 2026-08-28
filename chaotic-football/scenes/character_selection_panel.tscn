@@ -31,22 +31,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Back" type="Button" parent="." unique_id=1661794255]
-layout_mode = 0
-offset_left = 64.0
-offset_top = 64.0
-offset_right = 320.0
-offset_bottom = 128.0
-theme_override_fonts/font = ExtResource("1_3t7nf")
-theme_override_font_sizes/font_size = 36
-text = "Back"
-
 [node name="left_red" type="TextureButton" parent="ButtonGroup" unique_id=1082041059]
 layout_mode = 0
 offset_left = 1152.0
 offset_top = 512.0
 offset_right = 1216.0
 offset_bottom = 576.0
+focus_neighbor_top = NodePath("../../Back")
 focus_neighbor_right = NodePath("../right_red")
 texture_normal = ExtResource("2_oukwu")
 texture_hover = ExtResource("3_hdjqe")
@@ -59,6 +50,7 @@ offset_top = 576.0
 offset_right = 1728.0
 offset_bottom = 640.0
 rotation = -3.1415927
+focus_neighbor_top = NodePath("../../Back")
 texture_normal = ExtResource("2_oukwu")
 texture_hover = ExtResource("3_hdjqe")
 texture_focused = ExtResource("3_hdjqe")
@@ -71,6 +63,7 @@ offset_right = 832.0
 offset_bottom = 640.0
 rotation = -3.1415927
 focus_neighbor_left = NodePath("../left_blue")
+focus_neighbor_top = NodePath("../../Back")
 texture_normal = ExtResource("2_oukwu")
 texture_hover = ExtResource("3_hdjqe")
 texture_focused = ExtResource("3_hdjqe")
@@ -81,10 +74,22 @@ offset_left = 256.0
 offset_top = 512.0
 offset_right = 320.0
 offset_bottom = 576.0
+focus_neighbor_top = NodePath("../../Back")
 focus_neighbor_right = NodePath("../right_blue")
 texture_normal = ExtResource("2_oukwu")
 texture_hover = ExtResource("3_hdjqe")
 texture_focused = ExtResource("3_hdjqe")
+
+[node name="Back" type="Button" parent="." unique_id=1661794255]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 320.0
+offset_bottom = 128.0
+focus_neighbor_bottom = NodePath("../ButtonGroup/left_blue")
+theme_override_fonts/font = ExtResource("1_3t7nf")
+theme_override_font_sizes/font_size = 36
+text = "Back"
 
 [node name="ColorRect2" type="ColorRect" parent="." unique_id=2146559970]
 z_index = -3
