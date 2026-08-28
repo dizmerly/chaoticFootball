@@ -111,4 +111,17 @@ is whenever the player selects the start game menu, they are loaded into the cha
 screen, each controller can select their player skin, and that skin is passed into the player
 load skin function, in the game manager script. Later on, the character selection screen
 should be expanded into a horizontal grid system with probably up to 8 players total between
-red and blue teams. 
+red and blue teams.
+
+#### 8/27/26
+Got the character selction to function properly. Character selection is added to an array that stores
+all the selected characters, along with their filepaths, and connected to each controller via the controller
+id. The game now ends after one team is able to reach 10 points. Currently the gameplay loop from main menu
+to game is having 
+Main Menu -> (Local Play) -> Character Selection Screen -> (Both players press A or debugMode keybind) -> Game starts
+At 10 points game ends and sends players back to main menu. 
+If you would like to start the game wiht only one controller connected, you are able to press the keybind
+**Cmd/Ctrl + ]**
+The keybind will eventually be used as a debug keybind around the game, but currently the only place to use
+it is in the character selection menu. 
+
