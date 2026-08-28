@@ -31,6 +31,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Back" type="Button" parent="." unique_id=1661794255]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 320.0
+offset_bottom = 128.0
+theme_override_fonts/font = ExtResource("1_3t7nf")
+theme_override_font_sizes/font_size = 36
+text = "Back"
+
 [node name="left_red" type="TextureButton" parent="ButtonGroup" unique_id=1082041059]
 layout_mode = 0
 offset_left = 1152.0
@@ -195,3 +205,4 @@ color = Color(0.24705882, 0.9137255, 0.23921569, 1)
 [connection signal="pressed" from="ButtonGroup/right_red" to="." method="_on_right_red_pressed"]
 [connection signal="pressed" from="ButtonGroup/right_blue" to="." method="_on_right_blue_pressed"]
 [connection signal="pressed" from="ButtonGroup/left_blue" to="." method="_on_left_blue_pressed"]
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
