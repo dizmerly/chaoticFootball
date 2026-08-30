@@ -51,10 +51,3 @@ func _physics_process(delta: float) -> void:
 	
 	centroid = centroid / weights
 	global_position = global_position.lerp(centroid, LERP_WEIGHT * delta)
-	
-	# Keep the camera's center from falling below its built-in bottom limit
-	#global_position.y = min(global_position.y, limit_bottom)
-	#global_position.y = max(global_position.y, limit_top)
-	#global_position.x = min(global_position.x, limit_right)
-	#global_position.x = max(global_position.x, limit_left)
-	#

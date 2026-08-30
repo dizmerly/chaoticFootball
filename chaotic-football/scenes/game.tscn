@@ -2197,6 +2197,7 @@ sources/0 = SubResource("TileSetAtlasSource_pr1ej")
 sources/1 = SubResource("TileSetAtlasSource_05nbr")
 
 [node name="Game" type="Node2D" unique_id=1370336921]
+position = Vector2(1, 0)
 script = ExtResource("1_kvpfn")
 
 [node name="Map" type="Node" parent="." unique_id=901398674]

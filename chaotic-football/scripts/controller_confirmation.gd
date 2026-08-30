@@ -20,7 +20,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.button_index == JOY_BUTTON_A and event.is_pressed(): 
 			pressed_a.emit(event.device)
 #			DEBUG
-			print("pressed a")
+			#print("pressed a")
 	else:
 		#print("not a button on joypad")
 		pass

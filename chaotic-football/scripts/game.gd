@@ -82,7 +82,6 @@ func add_player(player_index, ability_selection = "bonfire"):
 	
 	print(players)
 	
-#TODO add a remove player function. 
 func remove_player(player_index):
 	var players = get_tree().get_nodes_in_group("player")
 	var player

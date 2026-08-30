@@ -233,17 +233,12 @@ func shoot_ball():
 	var direction = get_stick_dir() if _is_roller else get_mouse_dir()
 	
 	var shot_ball = held_ball
-#	These collision exceptions do make ball collisions more correct, but removes ball jumping.
-	#shot_ball.add_collision_exception_with(self)
 	
 	shot_ball.shoot(direction)
 	held_ball = null
 	
 	await get_tree().create_timer(BALL_PICKUP_DELAY).timeout
 	pickupArea.monitoring = true
-	
-	#if is_instance_valid(shot_ball):
-		#shot_ball.remove_collision_exception_with(self)
 
 func repossess():
 	var bodies = repossessArea.get_overlapping_bodies()
@@ -309,25 +304,12 @@ func _physics_process(delta: float) -> void:
 			if is_on_floor():
 				current_state = States.IDLE
 				
-
-	# Get the input direction and handle the movement/deceleration.
-	#if direction != 0 and not is_on_floor():
-		#velocity.x 	= move_toward(velocity.x, direction * MAX_SPEED, ACCELERATION * 2  * delta)
-	#elif direction != 0:
-		#velocity.x 	= move_toward(velocity.x, direction * MAX_SPEED, ACCELERATION * delta)
-	#elif is_on_floor():
-		#velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
-	#else:
-		#velocity.x = move_toward(velocity.x, 0, DRAG * delta)
-	
+					
 #	Raw speed movement
- 
 	if direction:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = 0
-		 
-
 	move_and_slide()
 	#position = position.round()
 	if held_ball != null:
