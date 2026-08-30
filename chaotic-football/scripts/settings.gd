@@ -12,6 +12,10 @@ func _ready() -> void:
 	brightness_slider.set_value_no_signal(SettingsManager.brightness)
 	window_mode_button.select(SettingsManager.window_mode)
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("back"):
+		_on_back_button_pressed()
+		get_viewport().set_input_as_handled()
 
 func _on_volume_slider_value_changed(value: float) -> void:
 	SettingsManager.set_master_volume(value)
@@ -30,3 +34,5 @@ func _on_option_button_item_selected(index: int) -> void:
 	
 func _on_back_button_pressed() -> void:
 	hide()
+	if get_parent().has_method("open_popup"):
+		get_parent().open_popup()

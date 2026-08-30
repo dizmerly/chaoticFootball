@@ -78,5 +78,5 @@ layout_mode = 1
 [connection signal="pressed" from="Panel/VBoxContainer/resume_button" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/options_button" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/quit_toMenu" to="." method="_on_quit_to_menu_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/quit_toDesktop" to="." method="_on_quit_to_desktop_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/quit_toDesktop" to="." method="_on_quit_button_2_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/quit_toDesktop" to="." method="_on_quit_to_desktop_pressed"]

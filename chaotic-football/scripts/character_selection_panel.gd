@@ -113,6 +113,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 #DEBUG FUNCTION
 func debug_start_game() -> void:
+	GameManager.debug_player_requested = true
 	GameManager.load_game()
 
 func cycle_blue_left() -> void: 

@@ -18,6 +18,7 @@ var teams: Dictionary = {
 #KEY : VALUE = CONTROLLER ID : SPRITE_SHEET
 var selected_characters: Dictionary = {}
 var is_loading_game := false
+var debug_player_requested := false
 
 
 # Game Managment signals

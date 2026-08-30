@@ -15,6 +15,7 @@ const BALL_REPOSSESSION_DELAY = 0.1
 const DEADZONE = 0.5
 const REPOSSESSION_MULTIPLIER = 0.69
 const DROP_MULTIPLIER = 0.8
+const JUMP_CUT_MULTIPLIER = 0.5
 
 const SHOOTING_RUMBLE_DURATION = 0.2
 
@@ -26,7 +27,7 @@ var player_id: int
 
 # Control Bindings
 var button_bindings = {
-	"interact": [JOY_BUTTON_X, KEY_F],
+	"interact": [JOY_BUTTON_X, KEY_F, MOUSE_BUTTON_LEFT],
 	"jump": [JOY_BUTTON_A, KEY_SPACE],
 	"run": [JOY_BUTTON_B, KEY_SHIFT],
 	"useAbility": [JOY_BUTTON_Y],
@@ -63,8 +64,8 @@ var trying_repossession: bool = false
 #state machine 
 enum States {IDLE, RUNNING, JUMPING, HOLDING, THROWING}
 var current_state = States.IDLE
-
-var _is_roller = false
+var second_jump: bool = false
+var _is_roller: bool = false
 
 @onready var ray = $ClosestGround
 @onready var ball_ray = $BallRayCast
@@ -72,6 +73,7 @@ var abilities: Array = []
 
 
 func _ready() -> void:
+	_is_roller = device_num != -1
 	add_to_group("player")
 	pickupArea.body_entered.connect(_on_ball_pickup_body_entered)
 	shockwave_frames.hide()
@@ -80,26 +82,17 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent):
-	
-	if event is InputEventMouseButton or event is InputEventMouseMotion:
-		#print("Using Mouse")
-		_is_roller = false
-	elif event is InputEventJoypadButton or event is InputEventJoypadMotion:
-		#print("Using Controller")
-		_is_roller = true
-# 	Change UI to show controller prompts
-	elif event is InputEventKey:
-		#print("Using Keyboard")
-		_is_roller = false
-	
 	if _is_roller:
 		if event.device != device_num: return
 		
 		# Handle joypad buttons
 		if event is InputEventJoypadButton:
 			# Handle jump
-			if event.button_index in button_bindings["jump"] and event.pressed:
-				jump()
+			if event.button_index in button_bindings["jump"]:
+				if event.pressed:
+					jump()
+				else:
+					cut_jump()
 			#	shooting ball mechanics via interaction
 			if event.button_index in button_bindings["interact"] and event.pressed:
 				if held_ball != null:
@@ -148,16 +141,25 @@ func _input(event: InputEvent):
 
 
 	else:
-		if not event is InputEventKey: return
-		if not event.pressed or event.echo: return
-		
+		if event is InputEventMouseButton:
+			if event.button_index in button_bindings["interact"] and event.pressed:
+				interact()
+			return
+
+		if not event is InputEventKey:
+			return
+
 		if event.keycode in button_bindings["jump"]:
-			jump()
+			if event.pressed and not event.echo:
+				jump()
+			elif not event.pressed:
+				cut_jump()
+
+		if not event.pressed or event.echo:
+			return
+
 		if event.keycode in button_bindings["interact"]:
-			if held_ball != null:
-				shoot_ball()
-			else:
-				repossess()
+			interact()
 		
 		
 # 0.2 deadzone here same as boilerplate
@@ -227,6 +229,20 @@ func update_animation() -> void:
 func jump() -> void:
 	if is_on_floor():
 		velocity.y = JUMP_VELOCITY
+	elif not second_jump:
+		velocity.y = JUMP_VELOCITY
+		second_jump = true
+
+func cut_jump():
+	# only cut the jump if the player is jumping upwards
+	if velocity.y < 0.0:
+		velocity.y *= JUMP_CUT_MULTIPLIER
+
+func interact() -> void:
+	if held_ball != null:
+		shoot_ball()
+	else:
+		repossess()
 
 func shoot_ball():
 	pickupArea.monitoring = false
@@ -273,11 +289,18 @@ func repossess():
 
 func _physics_process(delta: float) -> void:
 	update_animation()
-	var direction = apply_deadzone(Input.get_joy_axis(device_num, axis_bindings["horizontal"][0]))
+	var direction: float
+	if _is_roller:
+		direction = apply_deadzone(Input.get_joy_axis(device_num, axis_bindings["horizontal"][0]))
+	else:
+		direction = Input.get_axis("left", "right")
 	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+#	Whenever the player lands on the ground, reset their ability to double jump.
+	if is_on_floor():
+		second_jump = false
 	
 #	handle whether character is going left or right
 #	key point, the if statement here makes sure whatever the

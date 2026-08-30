@@ -35,6 +35,9 @@ func _ready() -> void:
 	GameManager.controller_join_requested.connect(_on_controller_join_requested)
 	if not GameManager.pending_devices.is_empty():
 		join_popup.show()
+	if GameManager.debug_player_requested:
+		add_debug_player()
+		GameManager.debug_player_requested = false
 	
 	
 	#connect settings
@@ -47,6 +50,28 @@ func _on_controller_join_requested(_device: int) -> void:
 	join_popup.show()
 	# Temporary fix to remove the keyboard player when a controller joins.
 	remove_player(-1)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("debugMode"):
+		add_debug_player()
+
+func add_debug_player() -> void:
+	if not GameManager.connected_controllers.is_empty():
+		var controller_id: int = GameManager.connected_controllers[0]
+		for player in players:
+			if player.player_id == controller_id:
+				return
+		add_player(controller_id)
+		player_ids.push_back(controller_id)
+		GameManager.pending_devices.erase(controller_id)
+		if GameManager.pending_devices.is_empty():
+			join_popup.hide()
+		return
+
+	for player in players:
+		if player.player_id == -1:
+			return
+	add_player(-1)
 
 func add_player(player_index, ability_selection = "bonfire"):
 	# Applying player attributes
@@ -70,26 +95,32 @@ func add_player(player_index, ability_selection = "bonfire"):
 	# add player to tree and append them to the 
 	# player array connected to camera
 	add_child(player)
-	if player_index in GameManager.blue_team:
+	if player_index == -1:
+		player.global_position = spawn_point_1.global_position
+	elif player_index in GameManager.blue_team:
 		player.global_position = spawn_point_1.global_position
 	elif player_index in GameManager.red_team:
 		player.global_position = spawn_point_2.global_position
 
 	players.append(player)
 	camera.players.append(player) # add player to list collection in camera
-	player.load_playerskin(GameManager.selected_characters[player_index])
+	if GameManager.selected_characters.has(player_index):
+		player.load_playerskin(GameManager.selected_characters[player_index])
 	
 	
 	print(players)
 	
 func remove_player(player_index):
-	var players = get_tree().get_nodes_in_group("player")
+	var player_nodes = get_tree().get_nodes_in_group("player")
 	var player
-	for p in players:
+	for p in player_nodes:
 		if p.player_id == player_index:
 			player = p
-			
-	remove_child(player)
+
+	if player != null:
+		players.erase(player)
+		camera.players.erase(player)
+		player.queue_free()
 	
 	
 # HUD CONTROL	
