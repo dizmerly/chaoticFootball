@@ -7,6 +7,7 @@ var input_maps: Array = []
 var player_ids: Array = []
 
 var GOAL_RUMBLE_DURATION = 1 #seconds
+const DEBUG_PLAYER_SPRITESHEET := "res://assets/SoccerGame/spainSpritesheet.png"
 
 @onready var join_popup: Panel = $Map/CanvasLayer/JoinPopup
 
@@ -61,7 +62,7 @@ func add_debug_player() -> void:
 		for player in players:
 			if player.player_id == controller_id:
 				return
-		add_player(controller_id)
+		add_player(controller_id, "bonfire", DEBUG_PLAYER_SPRITESHEET)
 		player_ids.push_back(controller_id)
 		GameManager.pending_devices.erase(controller_id)
 		if GameManager.pending_devices.is_empty():
@@ -71,9 +72,9 @@ func add_debug_player() -> void:
 	for player in players:
 		if player.player_id == -1:
 			return
-	add_player(-1)
+	add_player(-1, "bonfire", DEBUG_PLAYER_SPRITESHEET)
 
-func add_player(player_index, ability_selection = "bonfire"):
+func add_player(player_index, ability_selection = "bonfire", spritesheet_path: String = ""):
 	# Applying player attributes
 	var player = load("res://scenes/player.tscn").instantiate()
 	player.device_num = player_index
@@ -104,7 +105,9 @@ func add_player(player_index, ability_selection = "bonfire"):
 
 	players.append(player)
 	camera.players.append(player) # add player to list collection in camera
-	if GameManager.selected_characters.has(player_index):
+	if not spritesheet_path.is_empty():
+		player.load_playerskin(spritesheet_path)
+	elif GameManager.selected_characters.has(player_index):
 		player.load_playerskin(GameManager.selected_characters[player_index])
 	
 	
