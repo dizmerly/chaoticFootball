@@ -1,8 +1,4 @@
-
 # Task List
-
-
-
 
 ### Functionality
 [x] Basic Gameplay Loop

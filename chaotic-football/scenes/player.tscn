@@ -74,7 +74,6 @@ _data = {
 }
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_u8vuu"]
-load_path = "res://.godot/imported/playerTwo.png-c6b9572b43dade3f4db7b8a37aee7ba6.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
 size = Vector2(8, 15)

@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-SettingsManager="*uid://dhrkkxr0qkddb"
 GameManager="*uid://coj5cp6ih8ldu"
+SettingsManager="*uid://dhrkkxr0qkddb"
 
 [display]
 
