@@ -47,4 +47,12 @@ places a player in the game tree that you can control with your mouse and keyboa
 #### May 2026
 <img width="800" height="539" alt="demo" src="https://github.com/user-attachments/assets/7496060c-5efc-4b09-9f12-419cde46646c" />
 
-<img width="800" height="auto" alt="game-controller-controls" src="https://github.com/user-attachments/assets/0376ab0c-02bc-4a6e-b673-a1d074651cd4" />
+## Controller Mapping
+<img width="1920" height="1080" alt="Default" src="https://github.com/user-attachments/assets/fdb6660a-6c33-462d-9d91-26a8295bfef9" />
+*On controller, aiming is done with the left stick (in future, a feature will be added to allow the user to select left stick aiming, or aiming separately with right stick. 
+
+## Keyboard Mapping
+WASD - Move
+Left Click - Interact / Shooting
+Mouse - Aiming
+F - Place and use ability.
