@@ -1,14 +1,19 @@
 
 # Chaotic Football
 
-This project is source-available under the Chaotic Football Non-Commercial Modding License.
-
-You may play with, mod, fork, and share it for free. You must credit the original project, 
-keep derivatives non-commercial, and you cannot use the game's name or branding for your own release.
-
 A football game built in Godot. The inspiration behind this game is 2d football games, along with super smash bro esque fighting games. 
 
 ## Running the project on your machine 
+
+### Quick Start Guide
+- Install Godot version 4.7 onto your machine
+- Clone this repository
+- Open chatotic footaball project in godot (route filepath to _project.godot_)
+- Confirm autolaods are enabled
+- Set the main scene to `res://scenes/main_menu.tscn` if Godot has not already done so.
+- Run the project 
+
+### Verbose Version
 
 ### Prerequisites
 - Godot version 4.7
@@ -35,10 +40,6 @@ Whenver you start the game, as of August 2026, the only way to use mouse, is by 
 and then pressing Ctrl/Cmd + ] (right bracket) on your keyboard to enter debugMode. Entering debugMode 
 places a player in the game tree that you can control with your mouse and keyboard. 
 
-
-
-
-
 #### August 2026
 <p align="center">
   <video src="https://github.com/user-attachments/assets/8a8aa588-a16b-4700-a0ca-05b1e42dec1f" width="100%" controls></video>
@@ -56,3 +57,25 @@ WASD - Move
 Left Click - Interact / Shooting
 Mouse - Aiming
 F - Place and use ability.
+
+## Project documentation
+
+- [Getting started](docs/getting_started.md)
+- [Game design](docs/game_design.md)
+- [Architecture](docs/architecture.md)
+- [Known issues](docs/known_issues.md)
+- [Changelog](CHANGELOG.md)
+
+## Roadmap
+
+- Online multiplayer
+- Map selection
+- More characters and abilities
+- Goal celebrations and animations
+- Level editor (potentially)
+
+## License
+This project is source-available under the Chaotic Football Non-Commercial Modding License.
+You may play with, mod, fork, and share it for free. You must credit the original project, 
+keep derivatives non-commercial, and you cannot use the game's name or branding for your own release.
+
