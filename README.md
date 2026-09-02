@@ -1,4 +1,3 @@
-<img width="939" height="238" alt="Screenshot 2026-09-01 at 9 56 39 PM" src="https://github.com/user-attachments/assets/66c545b3-7348-4fb2-8fbf-285de648d2a1" />
 
 # Chaotic Football
 
