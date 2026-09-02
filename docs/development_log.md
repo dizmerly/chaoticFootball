@@ -121,3 +121,6 @@ If you would like to start the game wiht only one controller connected, you are 
 The keybind will eventually be used as a debug keybind around the game, but currently the only place to use
 it is in the character selection menu. 
 
+
+#### 8/31/26
+I realized what feels bad about falling in the game! The acceleration due to gravity is about the same as when jumping upwards, and therefore there is a sort of unusual floaty feeling to the movement.
