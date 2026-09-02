@@ -5,7 +5,16 @@ A football game built in Godot. The inspiration behind this game is 2d football 
 
 ## Running the project on your machine 
 
-### Quick Start Guide
+### Download
+Download a prebuilt version of the project from the release
+- [Latest Release](https://github.com/dizmerly/chaoticFootball/releases/latest)
+- [All Releases](https://github.com/dizmerly/chaoticFootball/releases)
+
+#### Instructions
+- Downlaod the project
+- Depending on your OS, it may complain that it isn't a notarized file. If you would like to just download the zip version, feel free to do so as well. Version for Windows, Linux, and macOS are all available in the release page. 
+
+### Quick Start Guide (Manual) 
 - Install Godot version 4.7 onto your machine
 - Clone this repository
 - Open chatotic footaball project in godot (route filepath to _project.godot_)
@@ -14,8 +23,7 @@ A football game built in Godot. The inspiration behind this game is 2d football 
 - Run the project 
 
 ### Verbose Version
-
-### Prerequisites
+#### Prerequisites
 - Godot version 4.7
 - Forward+ Rendering
 
