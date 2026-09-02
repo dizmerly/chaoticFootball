@@ -60,7 +60,6 @@ F - Place and use ability.
 
 ## Project documentation
 
-- [Getting started](docs/getting_started.md)
 - [Game design](docs/game_design.md)
 - [Architecture](docs/architecture.md)
 - [Known issues](docs/known_issues.md)
