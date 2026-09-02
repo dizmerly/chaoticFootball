@@ -1,3 +1,4 @@
+<img width="939" height="238" alt="Screenshot 2026-09-01 at 9 56 39 PM" src="https://github.com/user-attachments/assets/66c545b3-7348-4fb2-8fbf-285de648d2a1" />
 
 # Chaotic Football
 
@@ -17,13 +18,13 @@ A football game built in Godot. The inspiration behind this game is 2d football 
 Clone this repository and open it in Godot, make sure that you have 
 properly configured globals from the chaoticFootball/chaotic-football/scripts directory. 
 It should look something like this: 
-
-<insert img here>
+<img width="939" height="238" alt="Global Scripts Filepaths" src="https://github.com/user-attachments/assets/ea85a79e-2a90-4710-bbeb-4d4226a497b4" />
 
 If configured incorrectly, it will cause errors whenver trying to run the game. 
 In the General tab, make sure that under **Application** | **Run**, the main scene is set to `res://scenes/main_menu.tscn`.
 
-<insert img two here>
+<img width="939" height="238" alt="Run Configuration" src="https://github.com/user-attachments/assets/a568bf3a-69cf-4b03-b2fd-6835f13082bd" />
+
 
 #### Playing with controller
 The controller detection can connect an arbitrary number of controllers. However, currently, the limit
