@@ -55,3 +55,26 @@ The project has two scripts that autoload
 - `scoreboard.tscn` displays and tracks scores.
 - `settings.tscn` and `popup_settings_menu.tscn` manage game settings, `settings.tscn` calls settings_manager when loading and saving settings
 
+## Gameplay Systems
+
+### Players and input
+Each player has a controller ID. `player.gd` reads input only from that controller.
+Mouse and keyboard play currently works through debug mode.
+
+### Ball and scoring
+
+Players can possess, shoot, and repossess the ball. Goal detection updates the
+scoreboard. After a goal, the game resets for kickoff.
+
+### Abilities
+
+Abilities are separate scenes. The current ability is Bonfire (yes the reference is intended). The game scene
+creates an ability instance for each player and assigns ownership using the
+player's controller ID.
+
+## Current limitations
+
+- Local multiplayer is currently limited to two players.
+- Mouse and keyboard play is currently intended for debug mode.
+- Online multiplayer and map selection are not implemented yet.
+
