@@ -2,6 +2,7 @@
 
 ## File Structure
 
+```
 chaoticFootball/  
 ├── chaotic-football/ 
 │   ├── .vscode/
@@ -16,3 +17,4 @@ chaoticFootball/
 │   ├── scenes/
 │   └── scripts/
 └── docs/
+```
