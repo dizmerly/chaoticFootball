@@ -74,15 +74,8 @@ As of August 2026, mouse and keyboard play is available only through debug mode.
 - [Game design](docs/game_design.md)
 - [Architecture](docs/architecture.md)
 - [Known issues](docs/known_issues.md)
+- [Roadmap](docs/roadmap.md)
 - [Changelog](CHANGELOG.md)
-
-## Roadmap
-
-- Online multiplayer
-- Map selection
-- More characters and abilities
-- Goal celebrations and animations
-- Level editor (potentially)
 
 ## License
 This project is source-available under the Chaotic Football Non-Commercial Modding License.
