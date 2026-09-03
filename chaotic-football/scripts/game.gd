@@ -96,12 +96,7 @@ func add_player(player_index, ability_selection = "bonfire", spritesheet_path: S
 	# add player to tree and append them to the 
 	# player array connected to camera
 	add_child(player)
-	if player_index == -1:
-		player.global_position = spawn_point_1.global_position
-	elif player_index in GameManager.blue_team:
-		player.global_position = spawn_point_1.global_position
-	elif player_index in GameManager.red_team:
-		player.global_position = spawn_point_2.global_position
+	send_to_spawn(player)
 
 	players.append(player)
 	camera.players.append(player) # add player to list collection in camera
@@ -144,10 +139,24 @@ func score_goal(team:int):
 	#rumble every controller connected upon goal scored
 	for id in player_ids:
 		Input.start_joy_vibration(id, 0.7, 0.7, GOAL_RUMBLE_DURATION)
-	if players.size() > 0:
-		players[0].global_position = spawn_point_1.global_position
-	if players.size() > 1:
-		players[1].global_position = spawn_point_2.global_position
+	respawn_all_players()
+
+
+# TODO remove the hardcoded nature of this function
+func get_spawn_point_for_player(player) -> Marker2D:
+	if player.player_id == -1 or player.player_id in GameManager.blue_team:
+		return spawn_point_1
+	return spawn_point_2
+
+
+func send_to_spawn(player) -> void:
+	var spawn_point := get_spawn_point_for_player(player)
+	player.global_position = spawn_point.global_position
+
+
+func respawn_all_players() -> void:
+	for player in players:
+		send_to_spawn(player)
 
 func _on_goalpost_scored(team: int) -> void:
 	score_goal(team)
