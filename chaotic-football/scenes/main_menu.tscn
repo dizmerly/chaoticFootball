@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bv41ydhspm6nd" path="res://scripts/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="FontFile" uid="uid://cy5p8l8p0aaj4" path="res://assets/fonts/Minecraft.ttf" id="2_ekxnf"]
 [ext_resource type="PackedScene" uid="uid://c7qeskanqdv48" path="res://scenes/settings.tscn" id="3_bqqt6"]
+[ext_resource type="PackedScene" uid="uid://cddh47dx317xd" path="res://scenes/version_label.tscn" id="4_wu84c"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bbtho"]
 font = ExtResource("2_ekxnf")
@@ -104,6 +105,10 @@ label_settings = SubResource("LabelSettings_bbtho")
 
 [node name="Settings Menu" parent="CanvasLayer" unique_id=31275889 instance=ExtResource("3_bqqt6")]
 visible = false
+
+[node name="Version Label" parent="CanvasLayer" unique_id=1982470194 instance=ExtResource("4_wu84c")]
+size_flags_horizontal = 8
+size_flags_vertical = 8
 
 [connection signal="pressed" from="Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

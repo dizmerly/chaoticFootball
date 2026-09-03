@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cddh47dx317xd"]
+
+[ext_resource type="Script" uid="uid://bu5dn48a0ygje" path="res://scenes/version_label.gd" id="1_caocm"]
+
+[node name="Label" type="Label" unique_id=701170356]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+script = ExtResource("1_caocm")
