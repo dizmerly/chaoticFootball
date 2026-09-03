@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to Chaotic Football will be documented in this file.
+Changes to ChaoticFootball are documented in this file.
 
 ## v0.1.0-alpha 
 Date 09/01/2026
