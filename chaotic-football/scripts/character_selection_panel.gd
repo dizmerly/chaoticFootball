@@ -24,7 +24,7 @@ const CHARACTERS = [
 	{
 		"id": "spain",
 		"portrait": preload("res://assets/SoccerGame/portraits/spainPortrait.png"),
-		"spritesheet": "res://assets/SoccerGame/spainSpritesheet.png"
+		"spritesheet": "res://assets/SoccerGame/playertest.png"
 	},
 	{
 		"id": "argentina",
