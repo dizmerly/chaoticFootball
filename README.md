@@ -1,4 +1,6 @@
 
+https://github.com/user-attachments/assets/97b19770-d7c0-4804-97aa-a171a062154c
+
 # Chaotic Football
 
 A football game built in Godot, inspired by 2D football games and Super Smash Bros.-esque fighting games.
@@ -51,7 +53,7 @@ As of August 2026, mouse and keyboard play is available only through debug mode.
 
 #### August 2026
 <p align="center">
-  <video src="https://github.com/user-attachments/assets/8a8aa588-a16b-4700-a0ca-05b1e42dec1f" width="100%" controls></video>
+  <img width="800" height="539" alt="demo" src="https://github.com/user-attachments/assets/4fbb8225-6ccb-4440-af6d-d39481d12c2b" />
 </p>
 
 #### May 2026
